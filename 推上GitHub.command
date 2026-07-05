@@ -19,7 +19,7 @@ fi
 # Commit + Push
 TIMESTAMP=$(date '+%Y-%m-%d %H:%M')
 git commit -m "Update: ${TIMESTAMP}"
-git push origin main
+git pull origin main --no-edit 2>/dev/null; git push origin main
 
 echo ""
 echo "✅ 已成功推上 GitHub！"
