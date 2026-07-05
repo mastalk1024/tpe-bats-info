@@ -22,42 +22,42 @@
 
   /* 培訓隊 */
   .ct-btns { display: flex; gap: 8px; margin-bottom: 14px; }
-  .ct-btns button { flex: 1; padding: 12px; border-radius: 10px; cursor: pointer; border: none; font-size: 14px; font-weight: bold; }
+  .ct-btns button { flex: 1; padding: 12px; border-radius: 10px; cursor: pointer; border: none; font-size: 18px; font-weight: bold; }
   .btn-active { background: #ff0000; color: #fff; }
   .btn-gray { background: #333; color: #aaa; }
   .game-card { background: #1a1a1a; border: 1px solid #333; border-radius: 10px; padding: 12px; margin-bottom: 10px; }
   .game-card-today { background: #0a2a4a; border-color: #3498db; }
   .game-card-past { background: #111; border-color: #2a2a2a; }
-  .game-date { font-weight: bold; font-size: 14px; margin-bottom: 8px; }
-  .game-row { display: flex; align-items: center; gap: 6px; padding: 5px 0; border-bottom: 1px solid #1e1e1e; font-size: 13px; }
+  .game-date { font-weight: bold; font-size: 18px; margin-bottom: 8px; }
+  .game-row { display: flex; align-items: center; gap: 6px; padding: 5px 0; border-bottom: 1px solid #1e1e1e; font-size: 17px; }
   .game-row:last-child { border-bottom: none; }
-  .g-num { color: #888; min-width: 20px; font-weight: bold; }
-  .g-time { color: #aaa; font-size: 11px; white-space: nowrap; min-width: 95px; }
+  .g-num { color: #888; min-width: 24px; font-weight: bold; }
+  .g-time { color: #aaa; font-size: 15px; white-space: nowrap; min-width: 110px; }
   .g-team { flex: 1; font-weight: bold; }
-  .g-vs { color: #555; font-size: 11px; }
+  .g-vs { color: #555; font-size: 15px; }
   .team-card { background: #1a1a1a; border-radius: 10px; padding: 12px; margin-bottom: 10px; }
-  .team-name { font-weight: bold; margin-bottom: 8px; font-size: 14px; }
+  .team-name { font-weight: bold; margin-bottom: 8px; font-size: 18px; }
   .tags { display: flex; flex-wrap: wrap; gap: 6px; }
-  .ptag { background: #222; border-radius: 6px; padding: 4px 10px; font-size: 13px; color: #ddd; }
-  .badge { background: #3498db; color: #fff; border-radius: 5px; padding: 1px 7px; font-size: 11px; margin-left: 6px; }
+  .ptag { background: #222; border-radius: 6px; padding: 4px 10px; font-size: 17px; color: #ddd; }
+  .badge { background: #3498db; color: #fff; border-radius: 5px; padding: 1px 7px; font-size: 15px; margin-left: 6px; }
   .badge-past { background: #333; color: #888; }
-  .month-title { font-size: 15px; color: #ccc; font-weight: bold; margin: 16px 0 10px; border-bottom: 1px solid #222; padding-bottom: 6px; }
+  .month-title { font-size: 19px; color: #ccc; font-weight: bold; margin: 16px 0 10px; border-bottom: 1px solid #222; padding-bottom: 6px; }
 
   /* 訓練表 */
   .train-card { background: #1a1a1a; border: 1px solid #333; border-radius: 10px; padding: 12px; margin-bottom: 10px; }
   .train-card-today { background: #0a2a4a; border-color: #3498db; }
   .train-card-past { background: #111; border-color: #2a2a2a; }
-  .train-date { font-weight: bold; font-size: 14px; margin-bottom: 8px; }
-  .train-session { display: flex; align-items: flex-start; gap: 8px; padding: 6px 0; border-bottom: 1px solid #1e1e1e; font-size: 13px; }
+  .train-date { font-weight: bold; font-size: 18px; margin-bottom: 8px; }
+  .train-session { display: flex; align-items: flex-start; gap: 8px; padding: 6px 0; border-bottom: 1px solid #1e1e1e; font-size: 17px; }
   .train-session:last-child { border-bottom: none; }
-  .group-badge { border-radius: 5px; padding: 2px 8px; font-size: 11px; font-weight: bold; white-space: nowrap; min-width: 42px; text-align: center; }
-  .session-label { color: #888; font-size: 11px; white-space: nowrap; min-width: 52px; }
+  .group-badge { border-radius: 5px; padding: 2px 8px; font-size: 15px; font-weight: bold; white-space: nowrap; min-width: 52px; text-align: center; }
+  .session-label { color: #888; font-size: 15px; white-space: nowrap; min-width: 65px; }
   .session-times { display: flex; flex-direction: column; gap: 2px; flex: 1; }
   .time-row { display: flex; align-items: center; gap: 6px; }
-  .time-type { font-size: 11px; padding: 1px 6px; border-radius: 4px; white-space: nowrap; }
+  .time-type { font-size: 15px; padding: 1px 6px; border-radius: 4px; white-space: nowrap; }
   .type-fitness { background: #2c1810; color: #e8835a; }
   .type-ice { background: #0d1f35; color: #5ab3e8; }
-  .train-note { display: inline-block; background: #5a2d0c; color: #f0a070; font-size: 11px; padding: 1px 8px; border-radius: 4px; margin-left: 8px; }
+  .train-note { display: inline-block; background: #5a2d0c; color: #f0a070; font-size: 15px; padding: 1px 8px; border-radius: 4px; margin-left: 8px; }
 </style>
 </head>
 <body>
@@ -73,7 +73,7 @@
 <!-- 行事曆 -->
 <div id="tab-calendar" class="panel active">
   <iframe id="cal-frame"
-    src="https://calendar.google.com/calendar/embed?src=khe3f3dl9stgbac0s065ngchgc%40group.calendar.google.com&color=%23457357&src=km302edatkfnab5c6pbiov357c%40group.calendar.google.com&color=%2348eb28&src=n49hmtqf92j6p9u34hsu12k91s%40group.calendar.google.com&color=%2300C6C6&ctz=Asia%2FTaipei&mode=MONTH&showCalendars=1&showTitle=0&showTabs=1&showNav=1&showPrint=0&showTz=0"
+    src="https://calendar.google.com/calendar/embed?src=khe3f3dl9stgbac0s065ngchgc%40group.calendar.google.com&color=%23457357&src=km302edatkfnab5c6pbiov357c%40group.calendar.google.com&color=%2348eb28&src=n49hmtqf92j6p9u34hsu12k91s%40group.calendar.google.com&color=%2300C6C6&ctz=Asia%2FTaipei&mode=DAY&showCalendars=1&showTitle=0&showTabs=1&showNav=1&showPrint=0&showTz=0"
     frameborder="0" scrolling="no"></iframe>
 </div>
 
@@ -190,8 +190,8 @@ function renderSchedule() {
       d.games.forEach(g => {
         const isFemale = g.home.startsWith('女') || g.away.startsWith('女');
         const c = isFemale ? '#e74c3c' : '#3498db';
-        const hGK = g.homeGK ? `<div style="font-size:10px;color:#777;font-weight:normal;margin-top:2px">${g.homeGK.join('、')}</div>` : '';
-        const aGK = g.awayGK ? `<div style="font-size:10px;color:#777;font-weight:normal;margin-top:2px">${g.awayGK.join('、')}</div>` : '';
+        const hGK = g.homeGK ? `<div style="font-size:14px;color:#777;font-weight:normal;margin-top:2px">${g.homeGK.join('、')}</div>` : '';
+        const aGK = g.awayGK ? `<div style="font-size:14px;color:#777;font-weight:normal;margin-top:2px">${g.awayGK.join('、')}</div>` : '';
         html += `<div class="game-row" style="align-items:flex-start">
           <span class="g-num" style="padding-top:2px">G${g.g}</span>
           <span class="g-time" style="padding-top:2px">${g.time}</span>
@@ -212,7 +212,7 @@ function renderRoster() {
     const isMale = team.startsWith('男');
     const c = isMale ? '#3498db' : '#e74c3c';
     html += `<div class="team-card" style="border-left:4px solid ${c}" data-team="${team}">
-      <div class="team-name" style="color:${c}">${team} <span style="color:#666;font-size:12px;font-weight:normal">${players.length}人</span></div>
+      <div class="team-name" style="color:${c}">${team} <span style="color:#666;font-size:16px;font-weight:normal">${players.length}人</span></div>
       <div class="tags">
         ${players.map(p=>`<span class="ptag">${p}</span>`).join('')}
       </div>
@@ -380,8 +380,8 @@ function renderTraining() {
       d.games.forEach(g => {
         const isFemale = g.home.startsWith('女') || g.away.startsWith('女');
         const c = isFemale ? '#e74c3c' : '#3498db';
-        const hGK = g.homeGK ? `<div style="font-size:10px;color:#777;font-weight:normal;margin-top:2px">${g.homeGK.join('、')}</div>` : '';
-        const aGK = g.awayGK ? `<div style="font-size:10px;color:#777;font-weight:normal;margin-top:2px">${g.awayGK.join('、')}</div>` : '';
+        const hGK = g.homeGK ? `<div style="font-size:14px;color:#777;font-weight:normal;margin-top:2px">${g.homeGK.join('、')}</div>` : '';
+        const aGK = g.awayGK ? `<div style="font-size:14px;color:#777;font-weight:normal;margin-top:2px">${g.awayGK.join('、')}</div>` : '';
         html += `<div class="game-row" style="align-items:flex-start">
           <span class="g-num" style="padding-top:2px">G${g.g}</span>
           <span class="g-time" style="padding-top:2px">${g.time}</span>
@@ -401,8 +401,8 @@ function renderTraining() {
           <span class="session-label">${s.label}</span>
           <span class="group-badge" style="background:${gc.bg};color:${gc.fg}">${s.group}</span>
           <div class="session-times">
-            <div class="time-row"><span class="time-type type-fitness">體能</span><span style="color:#aaa;font-size:12px">${s.fitness}</span></div>
-            <div class="time-row"><span class="time-type type-ice">冰上</span><span style="color:#aaa;font-size:12px">${s.ice}</span></div>
+            <div class="time-row"><span class="time-type type-fitness">體能</span><span style="color:#aaa;font-size:16px">${s.fitness}</span></div>
+            <div class="time-row"><span class="time-type type-ice">冰上</span><span style="color:#aaa;font-size:16px">${s.ice}</span></div>
           </div>
         </div>`;
       });
