@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>🏒 TPE Bats 資訊站</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, sans-serif; background: #0f0f0f; color: #fff; padding: 12px; font-size: 15px; }
+  h1 { color: #ff0000; font-size: 20px; margin-bottom: 2px; }
+  .subtitle { color: #888; font-size: 12px; margin-bottom: 14px; }
+  .tabs { display: flex; gap: 8px; margin-bottom: 14px; }
+  .tab { flex: 1; padding: 12px 8px; border-radius: 10px; cursor: pointer; background: #222; color: #aaa; border: none; font-size: 14px; text-align: center; font-weight: bold; }
+  .tab.active { background: #ff0000; color: #fff; }
+  .panel { display: none; }
+  .panel.active { display: block; }
+  input[type=text] { background: #1a1a1a; color: #fff; border: 1px solid #333; border-radius: 10px; padding: 12px; font-size: 14px; width: 100%; margin-bottom: 8px; }
+  .section-title { font-size: 14px; color: #aaa; margin: 16px 0 8px; border-bottom: 1px solid #222; padding-bottom: 6px; }
+
+  /* 行事曆 */
+  #cal-frame { border: 0; width: 100%; height: calc(100vh - 130px); min-height: 500px; border-radius: 10px; }
+
+  /* 培訓隊 */
+  .ct-btns { display: flex; gap: 8px; margin-bottom: 14px; }
+  .ct-btns button { flex: 1; padding: 12px; border-radius: 10px; cursor: pointer; border: none; font-size: 14px; font-weight: bold; }
+  .btn-active { background: #ff0000; color: #fff; }
+  .btn-gray { background: #333; color: #aaa; }
+  .game-card { background: #1a1a1a; border: 1px solid #333; border-radius: 10px; padding: 12px; margin-bottom: 10px; }
+  .game-card-today { background: #0a2a4a; border-color: #3498db; }
+  .game-card-past { background: #111; border-color: #2a2a2a; }
+  .game-date { font-weight: bold; font-size: 14px; margin-bottom: 8px; }
+  .game-row { display: flex; align-items: center; gap: 6px; padding: 5px 0; border-bottom: 1px solid #1e1e1e; font-size: 13px; }
+  .game-row:last-child { border-bottom: none; }
+  .g-num { color: #888; min-width: 20px; font-weight: bold; }
+  .g-time { color: #aaa; font-size: 11px; white-space: nowrap; min-width: 95px; }
+  .g-team { flex: 1; font-weight: bold; }
+  .g-vs { color: #555; font-size: 11px; }
+  .team-card { background: #1a1a1a; border-radius: 10px; padding: 12px; margin-bottom: 10px; }
+  .team-name { font-weight: bold; margin-bottom: 8px; font-size: 14px; }
+  .tags { display: flex; flex-wrap: wrap; gap: 6px; }
+  .ptag { background: #222; border-radius: 6px; padding: 4px 10px; font-size: 13px; color: #ddd; }
+  .badge { background: #3498db; color: #fff; border-radius: 5px; padding: 1px 7px; font-size: 11px; margin-left: 6px; }
+  .badge-past { background: #333; color: #888; }
+  .month-title { font-size: 15px; color: #ccc; font-weight: bold; margin: 16px 0 10px; border-bottom: 1px solid #222; padding-bottom: 6px; }
+
+  /* 訓練表 */
+  .train-card { background: #1a1a1a; border: 1px solid #333; border-radius: 10px; padding: 12px; margin-bottom: 10px; }
+  .train-card-today { background: #0a2a4a; border-color: #3498db; }
+  .train-card-past { background: #111; border-color: #2a2a2a; }
+  .train-date { font-weight: bold; font-size: 14px; margin-bottom: 8px; }
+  .train-session { display: flex; align-items: flex-start; gap: 8px; padding: 6px 0; border-bottom: 1px solid #1e1e1e; font-size: 13px; }
+  .train-session:last-child { border-bottom: none; }
+  .group-badge { border-radius: 5px; padding: 2px 8px; font-size: 11px; font-weight: bold; white-space: nowrap; min-width: 42px; text-align: center; }
+  .session-label { color: #888; font-size: 11px; white-space: nowrap; min-width: 52px; }
+  .session-times { display: flex; flex-direction: column; gap: 2px; flex: 1; }
+  .time-row { display: flex; align-items: center; gap: 6px; }
+  .time-type { font-size: 11px; padding: 1px 6px; border-radius: 4px; white-space: nowrap; }
+  .type-fitness { background: #2c1810; color: #e8835a; }
+  .type-ice { background: #0d1f35; color: #5ab3e8; }
+  .train-note { display: inline-block; background: #5a2d0c; color: #f0a070; font-size: 11px; padding: 1px 8px; border-radius: 4px; margin-left: 8px; }
+</style>
+</head>
+<body>
+
+<h1>🏒 TPE Bats</h1>
+<p class="subtitle">行事曆 ＋ 國家培訓隊資訊</p>
+
+<div class="tabs">
+  <button class="tab active" onclick="switchTab('calendar', this)">📅 行事曆</button>
+  <button class="tab" onclick="switchTab('ct', this)">🏒 培訓隊</button>
+</div>
+
+<!-- 行事曆 -->
+<div id="tab-calendar" class="panel active">
+  <iframe id="cal-frame"
+    src="https://calendar.google.com/calendar/embed?src=khe3f3dl9stgbac0s065ngchgc%40group.calendar.google.com&color=%23457357&src=km302edatkfnab5c6pbiov357c%40group.calendar.google.com&color=%2348eb28&src=n49hmtqf92j6p9u34hsu12k91s%40group.calendar.google.com&color=%2300C6C6&ctz=Asia%2FTaipei&mode=MONTH&showCalendars=1&showTitle=0&showTabs=1&showNav=1&showPrint=0&showTz=0"
+    frameborder="0" scrolling="no"></iframe>
+</div>
+
+<!-- 培訓隊 -->
+<div id="tab-ct" class="panel">
+  <div class="ct-btns">
+    <button id="ct-btn-s" class="btn-active" onclick="ctSwitch('s')">📅 比賽賽程</button>
+    <button id="ct-btn-t" class="btn-gray" onclick="ctSwitch('t')">🗓 訓練表</button>
+    <button id="ct-btn-r" class="btn-gray" onclick="ctSwitch('r')">👥 球員名單</button>
+  </div>
+  <div id="ct-s"></div>
+  <div id="ct-t" style="display:none"></div>
+  <div id="ct-r" style="display:none">
+    <input type="text" id="ct-search" placeholder="🔍 搜尋球員姓名..." oninput="ctSearch(this.value)">
+    <div id="ct-roster-wrap"></div>
+  </div>
+</div>
+
+<script>
+function switchTab(tab, el) {
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.getElementById('tab-' + tab).classList.add('active');
+  el.classList.add('active');
+}
+
+function ctSwitch(tab) {
+  document.getElementById('ct-s').style.display = tab==='s' ? 'block' : 'none';
+  document.getElementById('ct-t').style.display = tab==='t' ? 'block' : 'none';
+  document.getElementById('ct-r').style.display = tab==='r' ? 'block' : 'none';
+  document.getElementById('ct-btn-s').className = tab==='s' ? 'btn-active' : 'btn-gray';
+  document.getElementById('ct-btn-t').className = tab==='t' ? 'btn-active' : 'btn-gray';
+  document.getElementById('ct-btn-r').className = tab==='r' ? 'btn-active' : 'btn-gray';
+  if (tab==='r' && !document.getElementById('ct-roster-wrap').innerHTML) renderRoster();
+  if (tab==='t' && !document.getElementById('ct-t').innerHTML) renderTraining();
+}
+
+const CT_SCHEDULE = [
+  { month:'7月', days:[
+    { date:'7/4',  day:'六', md:'0704', games:[
+      {g:1,time:'21:30-22:20',home:'男3',away:'男4',homeGK:['邱顯程','侯辰熹'],awayGK:['高皓瑄','張祐綸']},
+      {g:2,time:'22:25-23:15',home:'女1',away:'女2',homeGK:['陳品潔','鍾以晨'],awayGK:['劉提敏','翟鍾敏']},
+      {g:3,time:'23:20-00:10',home:'男1',away:'男2',homeGK:['陳泰宇','董至桀'],awayGK:['陳浩喆','李浩維']},
+    ]},
+    { date:'7/5',  day:'日', md:'0705', games:[
+      {g:1,time:'21:30-22:20',home:'男5',away:'男6',homeGK:['趙梓森','林宥丞'],awayGK:['陳俐龍','吳承晅']},
+      {g:2,time:'22:25-23:15',home:'女3',away:'女4',homeGK:['林蕙炘','陳紫彤'],awayGK:['鍾愛','賴瀚宸']},
+      {g:3,time:'23:20-00:10',home:'男3',away:'男4',homeGK:['邱顯程','侯辰熹'],awayGK:['高皓瑄','張祐綸']},
+    ]},
+    { date:'7/18', day:'六', md:'0718', games:[
+      {g:1,time:'21:30-22:20',home:'男3',away:'男2',homeGK:['邱顯程','侯辰熹'],awayGK:['陳浩喆','李浩維']},
+      {g:2,time:'22:25-23:15',home:'女1',away:'女4',homeGK:['王羿晴','陳品潔'],awayGK:['賴瀚宸','周芃言']},
+      {g:3,time:'23:20-00:10',home:'男1',away:'男4',homeGK:['陳泰宇','江國睿'],awayGK:['高皓瑄','張祐綸']},
+    ]},
+    { date:'7/19', day:'日', md:'0719', games:[
+      {g:1,time:'21:30-22:20',home:'男5',away:'男4',homeGK:['趙梓森','林宥丞'],awayGK:['高皓瑄','張祐綸']},
+      {g:2,time:'22:25-23:15',home:'女3',away:'女2',homeGK:['林蕙炘','葉珈妤'],awayGK:['王韻慈','翟鍾敏']},
+      {g:3,time:'23:20-00:10',home:'男3',away:'男6',homeGK:['邱顯程','侯辰熹'],awayGK:['陳俐龍','吳承晅']},
+    ]},
+  ]},
+  { month:'8月', days:[
+    { date:'8/1',  day:'六', md:'0801', games:[
+      {g:1,time:'21:30-22:20',home:'男4',away:'男2',homeGK:['高皓瑄','張祐綸'],awayGK:['李翊誠','陳浩喆']},
+      {g:2,time:'22:25-23:15',home:'男6',away:'男3',homeGK:['陳俐龍','吳承晅'],awayGK:['邱顯程','侯辰熹']},
+      {g:3,time:'23:20-00:10',home:'男5',away:'男1',homeGK:['林宥丞','蕭又宸'],awayGK:['江國睿','董至桀']},
+    ]},
+    { date:'8/2',  day:'日', md:'0802', games:[
+      {g:1,time:'21:30-22:20',home:'男2',away:'男6',homeGK:['李翊誠','李浩維'],awayGK:['陳俐龍','吳承晅']},
+      {g:2,time:'22:25-23:15',home:'女1',away:'女2',homeGK:['王羿晴','鍾以晨'],awayGK:['王韻慈','劉提敏']},
+      {g:3,time:'23:20-00:10',home:'男1',away:'男5',homeGK:['陳泰宇','董至桀'],awayGK:['趙梓森','蕭又宸']},
+    ]},
+    { date:'8/15', day:'六', md:'0815', games:[
+      {g:1,time:'21:30-22:20',home:'女2',away:'女4',homeGK:['陳奕晴','劉提敏'],awayGK:['邱奕婷','周芃言']},
+      {g:2,time:'22:25-23:15',home:'女3',away:'女1',homeGK:['陳紫彤','葉珈妤'],awayGK:['陳品潔','鍾以晨']},
+      {g:3,time:'23:20-00:10',home:'男5',away:'男6',homeGK:['林宥丞','蕭又宸'],awayGK:['陳俐龍','吳承晅']},
+    ]},
+    { date:'8/16', day:'日', md:'0816', games:[
+      {g:1,time:'21:30-22:20',home:'男1',away:'男2',homeGK:['江國睿','董至桀'],awayGK:['李翊誠','陳浩喆']},
+      {g:2,time:'22:25-23:15',home:'女3',away:'女4',homeGK:['林蕙炘','陳紫彤'],awayGK:['鍾愛','周芃言']},
+      {g:3,time:'23:20-00:10',home:'女1',away:'女2',homeGK:['王羿晴','鍾以晨'],awayGK:['陳奕晴','劉提敏']},
+    ]},
+  ]},
+];
+
+const CT_ROSTER = {
+  '男子第1隊':['楊子毅','蔡昱蘅','林郭州','林允','卓慈駿','徐勁文','彭楷竣','鄭松綠','施冠宇','羅祐翔','李坤鴻','彭驀','張立凱','何昕遠','曹叢絃','張瀚元','李翊誠','江國睿','董至桀'],
+  '男子第2隊':['游松穎','張允盛','蔣承澔','劉承桓','林翊丞','游育霖','林恩旭','葉鍇睿','陳冠廷','顏呈翰','魏道綸','陳柏安','陳冠捷','李政璋','吳凱振','邱翊翔','陳泰宇','陳浩喆','李浩維'],
+  '男子第3隊':['紀凱元','侯辰翰','陳以樂','葉鎧齊','王毓鋒','蕭敬恆','陳泰丞','林睿宇','詹上儀','陳炯元','林宥辰','陳守羿','張嘉哲','李曜宇','廖文煜','許語軒','陳亭旭','邱顯程','侯辰熹'],
+  '男子第4隊':['楊苡銜','林靖堯','林寬','賴竑愷','王冠喆','梅拓允','楊長興','張書睿','劉冠廷','陳春柏','賴楨宸','陳律桓','蕭辰昀','洪郁善','杜炎','沈延霖','高皓晟','張祐綸','高皓瑄'],
+  '男子第5隊':['吳逸鋐','李立宸','崔碩恩','王詠喧','郭駿業','陳柏澔','林子暘','郝羿翔','林宏儒','林宜寬','蔡承元','施以諾','吳封廷','潘怡誠','宋沅澔','賴柏愷','林煒軒','趙梓森','蕭又宸','林宥丞'],
+  '男子第6隊':['廖品翔','李宜甫','哈勇·拉娃','詹舜宇','文培安','王冠堯','林宇軒','林冠群','簡亦瑢','葉劉浩','卓立夏','彭立閔','許宬翊','蔡承叡','劉睿然','支紹權','白立煜','吳承晅','陳俐龍'],
+  '女子第1隊':['廖又靚','王宥薇','王芮恩','陳春蓉','吳季慈','譚舒庭','曾千謙','姚皖芝','童毓晴','蔡宛論','謝舒宇','郭怡珍','余佳容','徐雨彤','林洋萁','鍾以晨','陳品潔','王羿晴'],
+  '女子第2隊':['謝知辰','王芷妤','吳曉珮','高葦庭','卓芷宣','李昕容','黃筠筑','許庭毓','游旻璇','徐可芯','詹允茜','張恩斌','鍾情','丁苡恩','沙云筠','王韻慈','鍾愛','陳奕晴'],
+  '女子第3隊':['鍾勻琤','林珊如','張馨尹','洪遠橋','陸欣妤','劉廷瑋','梅千允','王璇','吳曉玥','莊若莛','徐煜棠','曾媗瑀','連曉晞','林宜嫻','黃敏娟','陳紫彤','葉珈妤','林蔓妡'],
+  '女子第4隊':['張宥心','陳品妍','張恩瑋','賴渝宸','盧可婕','施樂佳','王書妤','葉品妡','陳維潔','黃子庭','鍾采媗','詹禺羽','林永媞','梁羽彤','陳萃漾','邱奕婷','劉提敏','周芃言'],
+};
+
+function renderSchedule() {
+  const now = new Date();
+  const todayMd = String(now.getMonth()+1).padStart(2,'0') + String(now.getDate()).padStart(2,'0');
+  let html = '';
+  CT_SCHEDULE.forEach(m => {
+    html += `<div class="month-title">🗓 ${m.month} 比賽日</div>`;
+    m.days.forEach(d => {
+      const isPast = d.md < todayMd;
+      const isToday = d.md === todayMd;
+      const cardClass = isToday ? 'game-card game-card-today' : isPast ? 'game-card game-card-past' : 'game-card';
+      const dateColor = isToday ? '#5af' : isPast ? '#555' : '#fff';
+      const badge = isToday
+        ? `<span class="badge">今天</span>`
+        : isPast ? `<span class="badge badge-past">結束</span>` : '';
+      html += `<div class="${cardClass}">
+        <div class="game-date" style="color:${dateColor}">📅 ${d.date}（${d.day}）${badge}</div>`;
+      d.games.forEach(g => {
+        const isFemale = g.home.startsWith('女') || g.away.startsWith('女');
+        const c = isFemale ? '#e74c3c' : '#3498db';
+        const hGK = g.homeGK ? `<div style="font-size:10px;color:#777;font-weight:normal;margin-top:2px">${g.homeGK.join('、')}</div>` : '';
+        const aGK = g.awayGK ? `<div style="font-size:10px;color:#777;font-weight:normal;margin-top:2px">${g.awayGK.join('、')}</div>` : '';
+        html += `<div class="game-row" style="align-items:flex-start">
+          <span class="g-num" style="padding-top:2px">G${g.g}</span>
+          <span class="g-time" style="padding-top:2px">${g.time}</span>
+          <div class="g-team" style="text-align:right;color:${c}">${g.home}${hGK}</div>
+          <span class="g-vs" style="padding-top:2px">vs</span>
+          <div class="g-team" style="color:${c}">${g.away}${aGK}</div>
+        </div>`;
+      });
+      html += '</div>';
+    });
+  });
+  document.getElementById('ct-s').innerHTML = html;
+}
+
+function renderRoster() {
+  let html = '';
+  Object.entries(CT_ROSTER).forEach(([team, players]) => {
+    const isMale = team.startsWith('男');
+    const c = isMale ? '#3498db' : '#e74c3c';
+    html += `<div class="team-card" style="border-left:4px solid ${c}" data-team="${team}">
+      <div class="team-name" style="color:${c}">${team} <span style="color:#666;font-size:12px;font-weight:normal">${players.length}人</span></div>
+      <div class="tags">
+        ${players.map(p=>`<span class="ptag">${p}</span>`).join('')}
+      </div>
+    </div>`;
+  });
+  document.getElementById('ct-roster-wrap').innerHTML = html;
+}
+
+function ctSearch(q) {
+  if (!document.getElementById('ct-roster-wrap').innerHTML) renderRoster();
+  q = q.trim();
+  document.querySelectorAll('.team-card').forEach(card => {
+    const tags = card.querySelectorAll('.ptag');
+    let found = 0;
+    tags.forEach(t => {
+      const match = !q || t.textContent.includes(q);
+      t.style.background = (match && q) ? '#1a3a5a' : '#222';
+      t.style.color = (match && q) ? '#fff' : '#ddd';
+      if (match) found++;
+    });
+    card.style.display = (!q || found > 0) ? '' : 'none';
+  });
+}
+
+const CT_TRAINING = [
+  { month:'7月', days:[
+    { date:'7/1',  day:'三', md:'0701', note:'說明會', sessions:[
+      { label:'第一梯次', group:'IJKL', fitness:'20:30-21:15', ice:'21:30-22:45'},
+      { label:'第二梯次', group:'EFGH', fitness:'22:00-22:45', ice:'23:00-00:15'},
+    ]},
+    { date:'7/3',  day:'五', md:'0703', sessions:[
+      { label:'第一梯次', group:'IJKL', fitness:'20:30-21:15', ice:'21:30-22:45'},
+      { label:'第二梯次', group:'ABCD', fitness:'22:00-22:45', ice:'23:00-00:15'},
+    ]},
+    { date:'7/10', day:'五', md:'0710', sessions:[
+      { label:'第一梯次', group:'IJKL', fitness:'20:30-21:15', ice:'21:30-22:45'},
+      { label:'第二梯次', group:'EFGH', fitness:'22:00-22:45', ice:'23:00-00:15'},
+    ]},
+    { date:'7/13', day:'一', md:'0713', sessions:[
+      { label:'第一梯次', group:'EFGH', fitness:'20:30-21:15', ice:'21:30-22:45'},
+      { label:'第二梯次', group:'ABCD', fitness:'22:00-22:45', ice:'23:00-00:15'},
+    ]},
+    { date:'7/15', day:'三', md:'0715', sessions:[
+      { label:'第一梯次', group:'IJKL', fitness:'20:30-21:15', ice:'21:30-22:45'},
+      { label:'第二梯次', group:'ABCD', fitness:'22:00-22:45', ice:'23:00-00:15'},
+    ]},
+    { date:'7/17', day:'五', md:'0717', sessions:[
+      { label:'第一梯次', group:'IJKL', fitness:'20:30-21:15', ice:'21:30-22:45'},
+      { label:'第二梯次', group:'EFGH', fitness:'22:00-22:45', ice:'23:00-00:15'},
+    ]},
+    { date:'7/20', day:'一', md:'0720', sessions:[
+      { label:'第一梯次', group:'IJKL', fitness:'20:30-21:15', ice:'21:30-22:45'},
+      { label:'第二梯次', group:'ABCD', fitness:'22:00-22:45', ice:'23:00-00:15'},
+    ]},
+    { date:'7/22', day:'三', md:'0722', sessions:[
+      { label:'第一梯次', group:'EFGH', fitness:'20:30-21:15', ice:'21:30-22:45'},
+      { label:'第二梯次', group:'ABCD', fitness:'22:00-22:45', ice:'23:00-00:15'},
+    ]},
+    { date:'7/24', day:'五', md:'0724', sessions:[
+      { label:'第一梯次', group:'EFGH', fitness:'20:30-21:15', ice:'21:30-22:45'},
+      { label:'第二梯次', group:'ABCD', fitness:'22:00-22:45', ice:'23:00-00:15'},
+    ]},
+    { date:'7/27', day:'一', md:'0727', sessions:[
+      { label:'第一梯次', group:'EFGH', fitness:'20:30-21:15', ice:'21:30-22:45'},
+      { label:'第二梯次', group:'ABCD', fitness:'22:00-22:45', ice:'23:00-00:15'},
+    ]},
+    { date:'7/29', day:'三', md:'0729', sessions:[
+      { label:'第一梯次', group:'EFGH', fitness:'20:30-21:15', ice:'21:30-22:45'},
+      { label:'第二梯次', group:'ABCD', fitness:'22:00-22:45', ice:'23:00-00:15'},
+    ]},
+    { date:'7/31', day:'五', md:'0731', sessions:[
+      { label:'第一梯次', group:'EFGH', fitness:'20:30-21:15', ice:'21:30-22:45'},
+      { label:'第二梯次', group:'ABCD', fitness:'22:00-22:45', ice:'23:00-00:15'},
+    ]},
+  ]},
+  { month:'8月', days:[
+    { date:'8/3',  day:'一', md:'0803', sessions:[
+      { label:'第一梯次', group:'EFGH', fitness:'20:30-21:15', ice:'21:30-22:45'},
+      { label:'第二梯次', group:'ABCD', fitness:'22:00-22:45', ice:'23:00-00:15'},
+    ]},
+    { date:'8/5',  day:'三', md:'0805', sessions:[
+      { label:'第一梯次', group:'IJKL', fitness:'20:30-21:15', ice:'21:30-22:45'},
+      { label:'第二梯次', group:'ABCD', fitness:'22:00-22:45', ice:'23:00-00:15'},
+    ]},
+    { date:'8/7',  day:'五', md:'0807', sessions:[
+      { label:'第一梯次', group:'IJKL', fitness:'20:30-21:15', ice:'21:30-22:45'},
+      { label:'第二梯次', group:'EFGH', fitness:'22:00-22:45', ice:'23:00-00:15'},
+    ]},
+    { date:'8/10', day:'一', md:'0810', sessions:[
+      { label:'第一梯次', group:'IJKL', fitness:'20:30-21:15', ice:'21:30-22:45'},
+      { label:'第二梯次', group:'ABCD', fitness:'22:00-22:45', ice:'23:00-00:15'},
+    ]},
+    { date:'8/12', day:'三', md:'0812', sessions:[
+      { label:'第一梯次', group:'EFGH', fitness:'20:30-21:15', ice:'21:30-22:45'},
+      { label:'第二梯次', group:'ABCD', fitness:'22:00-22:45', ice:'23:00-00:15'},
+    ]},
+    { date:'8/14', day:'五', md:'0814', sessions:[
+      { label:'第一梯次', group:'IJKL', fitness:'20:30-21:15', ice:'21:30-22:45'},
+      { label:'第二梯次', group:'EFGH', fitness:'22:00-22:45', ice:'23:00-00:15'},
+    ]},
+    { date:'8/17', day:'一', md:'0817', sessions:[
+      { label:'第一梯次', group:'EFGH', fitness:'20:30-21:15', ice:'21:30-22:45'},
+      { label:'第二梯次', group:'ABCD', fitness:'22:00-22:45', ice:'23:00-00:15'},
+    ]},
+    { date:'8/19', day:'三', md:'0819', sessions:[
+      { label:'第一梯次', group:'IJKL', fitness:'20:30-21:15', ice:'21:30-22:45'},
+      { label:'第二梯次', group:'ABCD', fitness:'22:00-22:45', ice:'23:00-00:15'},
+    ]},
+    { date:'8/21', day:'五', md:'0821', sessions:[
+      { label:'第一梯次', group:'IJKL', fitness:'20:30-21:15', ice:'21:30-22:45'},
+      { label:'第二梯次', group:'EFGH', fitness:'22:00-22:45', ice:'23:00-00:15'},
+    ]},
+    { date:'8/24', day:'一', md:'0824', sessions:[
+      { label:'第一梯次', group:'IJKL', fitness:'20:30-21:15', ice:'21:30-22:45'},
+      { label:'第二梯次', group:'ABCD', fitness:'22:00-22:45', ice:'23:00-00:15'},
+    ]},
+    { date:'8/26', day:'三', md:'0826', sessions:[
+      { label:'第一梯次', group:'EFGH', fitness:'20:30-21:15', ice:'21:30-22:45'},
+      { label:'第二梯次', group:'ABCD', fitness:'22:00-22:45', ice:'23:00-00:15'},
+    ]},
+    { date:'8/28', day:'五', md:'0828', sessions:[
+      { label:'第一梯次', group:'IJKL', fitness:'20:30-21:15', ice:'21:30-22:45'},
+      { label:'第二梯次', group:'EFGH', fitness:'22:00-22:45', ice:'23:00-00:15'},
+    ]},
+    { date:'8/31', day:'一', md:'0831', sessions:[
+      { label:'第一梯次', group:'IJKL', fitness:'20:30-21:15', ice:'21:30-22:45'},
+      { label:'第二梯次', group:'ABCD', fitness:'22:00-22:45', ice:'23:00-00:15'},
+    ]},
+  ]},
+];
+
+const GROUP_COLORS = {
+  'ABCD': { bg:'#143d1f', fg:'#4ec96e' },
+  'EFGH': { bg:'#3d2a09', fg:'#e8a040' },
+  'IJKL': { bg:'#1a1050', fg:'#8888ff' },
+};
+
+function renderTraining() {
+  const now = new Date();
+  const todayMd = String(now.getMonth()+1).padStart(2,'0') + String(now.getDate()).padStart(2,'0');
+
+  // 合併訓練日 + 比賽日，依日期排序
+  const allDays = [];
+  CT_TRAINING.forEach(m => m.days.forEach(d => allDays.push({...d, type:'train', month:m.month})));
+  CT_SCHEDULE.forEach(m => m.days.forEach(d => allDays.push({...d, type:'match', month:m.month})));
+  allDays.sort((a,b) => a.md.localeCompare(b.md));
+
+  let html = '';
+  let curMonth = '';
+  allDays.forEach(d => {
+    if (d.month !== curMonth) {
+      curMonth = d.month;
+      html += `<div class="month-title">📆 ${curMonth}</div>`;
+    }
+    const isPast = d.md < todayMd;
+    const isToday = d.md === todayMd;
+    const cardClass = isToday ? 'train-card train-card-today' : isPast ? 'train-card train-card-past' : 'train-card';
+    const dateColor = isToday ? '#5af' : isPast ? '#555' : '#fff';
+    const badge = isToday ? `<span class="badge">今天</span>` : isPast ? `<span class="badge badge-past">結束</span>` : '';
+
+    if (d.type === 'match') {
+      const noteHtml = `<span class="train-note">⚔️ 比賽日</span>`;
+      html += `<div class="${cardClass}" style="border-left:3px solid #e74c3c">
+        <div class="train-date" style="color:${dateColor}">📅 ${d.date}（${d.day}）${badge}${noteHtml}</div>`;
+      d.games.forEach(g => {
+        const isFemale = g.home.startsWith('女') || g.away.startsWith('女');
+        const c = isFemale ? '#e74c3c' : '#3498db';
+        const hGK = g.homeGK ? `<div style="font-size:10px;color:#777;font-weight:normal;margin-top:2px">${g.homeGK.join('、')}</div>` : '';
+        const aGK = g.awayGK ? `<div style="font-size:10px;color:#777;font-weight:normal;margin-top:2px">${g.awayGK.join('、')}</div>` : '';
+        html += `<div class="game-row" style="align-items:flex-start">
+          <span class="g-num" style="padding-top:2px">G${g.g}</span>
+          <span class="g-time" style="padding-top:2px">${g.time}</span>
+          <div class="g-team" style="text-align:right;color:${c}">${g.home}${hGK}</div>
+          <span class="g-vs" style="padding-top:2px">vs</span>
+          <div class="g-team" style="color:${c}">${g.away}${aGK}</div>
+        </div>`;
+      });
+      html += '</div>';
+    } else {
+      const noteHtml = d.note ? `<span class="train-note">${d.note}</span>` : '';
+      html += `<div class="${cardClass}">
+        <div class="train-date" style="color:${dateColor}">🏋️ ${d.date}（${d.day}）${badge}${noteHtml}</div>`;
+      d.sessions.forEach(s => {
+        const gc = GROUP_COLORS[s.group] || {bg:'#222',fg:'#aaa'};
+        html += `<div class="train-session">
+          <span class="session-label">${s.label}</span>
+          <span class="group-badge" style="background:${gc.bg};color:${gc.fg}">${s.group}</span>
+          <div class="session-times">
+            <div class="time-row"><span class="time-type type-fitness">體能</span><span style="color:#aaa;font-size:12px">${s.fitness}</span></div>
+            <div class="time-row"><span class="time-type type-ice">冰上</span><span style="color:#aaa;font-size:12px">${s.ice}</span></div>
+          </div>
+        </div>`;
+      });
+      html += '</div>';
+    }
+  });
+  document.getElementById('ct-t').innerHTML = html;
+}
+
+document.addEventListener('DOMContentLoaded', () => { renderSchedule(); });
+</script>
+</body>
+</html>
