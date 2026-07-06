@@ -14,6 +14,8 @@
   .tab.active { background: #ff0000; color: #fff; }
   .panel { display: none; }
   .panel.active { display: block; }
+  #sticky-top { position: sticky; top: 0; z-index: 100; background: #0f0f0f; margin: -12px -12px 0; padding: 12px 12px 0; }
+  .ct-btns-wrap { position: sticky; z-index: 99; background: #0f0f0f; padding-bottom: 6px; }
   input[type=text] { background: #1a1a1a; color: #fff; border: 1px solid #333; border-radius: 10px; padding: 12px; font-size: 14px; width: 100%; margin-bottom: 8px; }
   .section-title { font-size: 14px; color: #aaa; margin: 16px 0 8px; border-bottom: 1px solid #222; padding-bottom: 6px; }
 
@@ -62,12 +64,13 @@
 </head>
 <body>
 
+<div id="sticky-top">
 <h1>🏒 TPE Bats</h1>
 <p class="subtitle">行事曆 ＋ 國家培訓隊資訊</p>
-
 <div class="tabs">
   <button class="tab active" onclick="switchTab('calendar', this)">📅 行事曆</button>
   <button class="tab" onclick="switchTab('ct', this)">🏒 培訓隊</button>
+</div>
 </div>
 
 <!-- 行事曆 -->
@@ -79,10 +82,12 @@
 
 <!-- 培訓隊 -->
 <div id="tab-ct" class="panel">
+  <div class="ct-btns-wrap" id="ct-btns-wrap">
   <div class="ct-btns">
     <button id="ct-btn-s" class="btn-active" onclick="ctSwitch('s')">📅 比賽賽程</button>
     <button id="ct-btn-t" class="btn-gray" onclick="ctSwitch('t')">🗓 訓練表</button>
     <button id="ct-btn-r" class="btn-gray" onclick="ctSwitch('r')">👥 球員名單</button>
+  </div>
   </div>
   <div id="ct-s"></div>
   <div id="ct-t" style="display:none"></div>
@@ -98,6 +103,25 @@ function switchTab(tab, el) {
   document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
   document.getElementById('tab-' + tab).classList.add('active');
   el.classList.add('active');
+  if (tab === 'ct') {
+    const stickyH = document.getElementById('sticky-top') ? document.getElementById('sticky-top').offsetHeight : 0;
+    document.getElementById('ct-btns-wrap').style.top = stickyH + 'px';
+    window.scrollTo({top: 0});
+  }
+}
+
+function getStickyOffset() {
+  const top = document.getElementById('sticky-top');
+  const btns = document.getElementById('ct-btns-wrap');
+  return (top ? top.offsetHeight : 0) + (btns && btns.offsetParent ? btns.offsetHeight : 0);
+}
+
+function scrollToFirst(selector) {
+  const el = document.querySelector(selector);
+  if (!el) return;
+  const offset = getStickyOffset() + 8;
+  const top = el.getBoundingClientRect().top + window.scrollY - offset;
+  window.scrollTo({top, behavior: 'smooth'});
 }
 
 function ctSwitch(tab) {
@@ -107,18 +131,15 @@ function ctSwitch(tab) {
   document.getElementById('ct-btn-s').className = tab==='s' ? 'btn-active' : 'btn-gray';
   document.getElementById('ct-btn-t').className = tab==='t' ? 'btn-active' : 'btn-gray';
   document.getElementById('ct-btn-r').className = tab==='r' ? 'btn-active' : 'btn-gray';
+  // 設定 ct-btns 的 sticky top = sticky-top 的高度
+  const stickyH = document.getElementById('sticky-top') ? document.getElementById('sticky-top').offsetHeight : 0;
+  document.getElementById('ct-btns-wrap').style.top = stickyH + 'px';
   if (tab==='r' && !document.getElementById('ct-roster-wrap').innerHTML) renderRoster();
   if (tab==='t' && !document.getElementById('ct-t').innerHTML) renderTraining();
   if (tab==='s') {
-    setTimeout(() => {
-      const el = document.querySelector('#ct-s .game-card:not(.game-card-past)');
-      if (el) el.scrollIntoView({behavior:'smooth', block:'start'});
-    }, 0);
+    setTimeout(() => scrollToFirst('#ct-s .game-card:not(.game-card-past)'), 0);
   } else if (tab==='t') {
-    setTimeout(() => {
-      const el = document.querySelector('#ct-t .train-card:not(.train-card-past)');
-      if (el) el.scrollIntoView({behavior:'smooth', block:'start'});
-    }, 0);
+    setTimeout(() => scrollToFirst('#ct-t .train-card:not(.train-card-past)'), 0);
   }
 }
 
