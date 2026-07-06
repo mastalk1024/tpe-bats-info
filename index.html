@@ -109,6 +109,17 @@ function ctSwitch(tab) {
   document.getElementById('ct-btn-r').className = tab==='r' ? 'btn-active' : 'btn-gray';
   if (tab==='r' && !document.getElementById('ct-roster-wrap').innerHTML) renderRoster();
   if (tab==='t' && !document.getElementById('ct-t').innerHTML) renderTraining();
+  if (tab==='s') {
+    setTimeout(() => {
+      const el = document.querySelector('#ct-s .game-card:not(.game-card-past)');
+      if (el) el.scrollIntoView({behavior:'smooth', block:'start'});
+    }, 0);
+  } else if (tab==='t') {
+    setTimeout(() => {
+      const el = document.querySelector('#ct-t .train-card:not(.train-card-past)');
+      if (el) el.scrollIntoView({behavior:'smooth', block:'start'});
+    }, 0);
+  }
 }
 
 const CT_SCHEDULE = [
