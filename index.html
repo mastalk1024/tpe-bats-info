@@ -449,6 +449,12 @@ function renderTraining() {
   document.getElementById('ct-t').innerHTML = html;
 }
 
+// 從主畫面開啟（Standalone 模式）時強制重新載入，確保取得最新版本
+if (window.navigator.standalone && !sessionStorage.getItem('loaded')) {
+  sessionStorage.setItem('loaded', '1');
+  window.location.reload(true);
+}
+
 document.addEventListener('DOMContentLoaded', () => { renderSchedule(); });
 </script>
 </body>
