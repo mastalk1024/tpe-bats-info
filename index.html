@@ -139,6 +139,7 @@ function ctSwitch(tab) {
   document.getElementById('ct-btn-t').className = tab==='t' ? 'btn-active' : 'btn-gray';
   document.getElementById('ct-btn-r').className = tab==='r' ? 'btn-active' : 'btn-gray';
   if (tab==='r' && !document.getElementById('ct-roster-wrap').innerHTML) renderRoster();
+  if (tab==='r') document.getElementById('app-content').scrollTop = 0;
   if (tab==='t' && !document.getElementById('ct-t').innerHTML) renderTraining();
   if (tab==='s') {
     setTimeout(() => scrollToFirst('#ct-s .game-card:not(.game-card-past)'), 0);
