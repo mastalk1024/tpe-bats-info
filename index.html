@@ -79,9 +79,10 @@
   <!-- 培訓隊子分頁按鈕（切換到培訓隊時才顯示） -->
   <div id="ct-btns-wrap">
     <div class="ct-btns">
-      <button id="ct-btn-s" class="btn-active" onclick="ctSwitch('s')">📅 比賽賽程</button>
-      <button id="ct-btn-t" class="btn-gray" onclick="ctSwitch('t')">🗓 訓練表</button>
-      <button id="ct-btn-r" class="btn-gray" onclick="ctSwitch('r')">👥 球員名單</button>
+      <button id="ct-btn-s" class="btn-active" onclick="ctSwitch('s')">📅 賽程</button>
+      <button id="ct-btn-t" class="btn-gray" onclick="ctSwitch('t')">🗓 訓練</button>
+      <button id="ct-btn-g" class="btn-gray" onclick="ctSwitch('g')">🔠 分組</button>
+      <button id="ct-btn-r" class="btn-gray" onclick="ctSwitch('r')">👥 名單</button>
     </div>
   </div>
 </div>
@@ -100,6 +101,10 @@
 <div id="tab-ct" class="panel">
   <div id="ct-s"></div>
   <div id="ct-t" style="display:none"></div>
+  <div id="ct-g" style="display:none">
+    <input type="text" id="ct-gsearch" placeholder="🔍 搜尋球員姓名..." oninput="ctGroupSearch(this.value)">
+    <div id="ct-group-wrap"></div>
+  </div>
   <div id="ct-r" style="display:none">
     <input type="text" id="ct-search" placeholder="🔍 搜尋球員姓名..." oninput="ctSearch(this.value)">
     <div id="ct-roster-wrap"></div>
@@ -134,18 +139,67 @@ function scrollToFirst(selector) {
 function ctSwitch(tab) {
   document.getElementById('ct-s').style.display = tab==='s' ? 'block' : 'none';
   document.getElementById('ct-t').style.display = tab==='t' ? 'block' : 'none';
+  document.getElementById('ct-g').style.display = tab==='g' ? 'block' : 'none';
   document.getElementById('ct-r').style.display = tab==='r' ? 'block' : 'none';
   document.getElementById('ct-btn-s').className = tab==='s' ? 'btn-active' : 'btn-gray';
   document.getElementById('ct-btn-t').className = tab==='t' ? 'btn-active' : 'btn-gray';
+  document.getElementById('ct-btn-g').className = tab==='g' ? 'btn-active' : 'btn-gray';
   document.getElementById('ct-btn-r').className = tab==='r' ? 'btn-active' : 'btn-gray';
   if (tab==='r' && !document.getElementById('ct-roster-wrap').innerHTML) renderRoster();
-  if (tab==='r') document.getElementById('app-content').scrollTop = 0;
+  if (tab==='g' && !document.getElementById('ct-group-wrap').innerHTML) renderGroups();
+  if (tab==='r' || tab==='g') document.getElementById('app-content').scrollTop = 0;
   if (tab==='t' && !document.getElementById('ct-t').innerHTML) renderTraining();
   if (tab==='s') {
     setTimeout(() => scrollToFirst('#ct-s .game-card:not(.game-card-past)'), 0);
   } else if (tab==='t') {
     setTimeout(() => scrollToFirst('#ct-t .train-card:not(.train-card-past)'), 0);
   }
+}
+
+const CT_GROUPS = {
+  'A組':['張允盛','紀凱元','林睿宇','陳炯元','林宥辰','楊長興','劉冠廷','崔碩恩','王詠喧','蔡承元','文培安','彭驀','李政璋','吳凱振','潘怡誠','李翊誠','高皓瑄'],
+  'B組':['彭楷竣','陳冠廷','賴竑愷','王冠喆','吳逸鋐','李立宸','郝羿翔','林宜寬','王冠堯','張瀚元','廖文煜','許語軒','洪郁善','高皓晟','彭立閔','陳泰宇','陳俐龍'],
+  'C組':['蔡昱蘅','鄭松緣','蔣承澔','劉承桓','顏呈翰','蕭敬恆','陳泰丞','陳守羿','林宏儒','廖品翔','卓立夏','陳柏安','陳冠捷','陳亭旭','沈延霖','江國睿','趙梓森'],
+  'D組':['卓慈駿','施冠宇','游松穎','游育霖','林恩旭','葉鍇睿','陳以樂','葉鎧齊','葉劉浩','何昕遠','曹崴紘','邱翊翔','張嘉哲','李曜宇','支紹權','陳浩喆','吳承晅'],
+  'E組':['楊子毅','羅祐翔','李坤鴻','王毓鋒','梅拓允','陳律桓','林子暘','李宜甫','哈勇·拉娃','林冠群','簡亦瑢','吳封廷','蔡承叡','劉睿然','董至桀','邱顯程','蕭又宸'],
+  'F組':['林靖堯','林寬','郭駿業','陳柏澔','詹舜宇','林宇軒','張立凱','蕭辰昀','宋沅澔','賴柏愷','林煒軒','白立煜','張祐綸','林宥丞'],
+  'G組':['林郭州','林允','徐勁文','林翊丞','魏道綸','侯辰翰','詹上儀','楊苡銜','張書睿','陳春柏','賴楨宸','施以諾','杜炎','許宬翊','李浩維','侯辰熹'],
+  'H組':['吳季慈','譚舒庭','謝知辰','黃筠筑','許庭毓','洪遠橋','張恩瑋','謝舒宇','余佳容','徐雨彤','林洋萁','張恩斌','沙云筠','黃敏娟','陳蓁潔','王韻慈','鍾愛'],
+  'I組':['王芮恩','童毓晴','高葦庭','徐可芯','林珊如','劉廷瑋','王璇','吳曉玥','張宥心','王書妤','鍾采媗','鍾情','詹禺羽','陳奕晴','邱奕婷'],
+  'J組':['蔡宛論','王芷妤','吳曉珮','鍾勻琤','梅千允','盧可婕','施樂佳','葉品妡','陳維潔','黃子庭','曾媗瑀','林永媞','梁羽彤','陳品潔','陳紫彤','林蔓妡'],
+  'K組':['廖又靚','王宥薇','曾千謙','姚皖芝','李昕容','游旻璇','陸欣妤','莊若莛','徐煜棠','賴渝宸','連曉晞','林宜嫻','王羿晴','葉珈妤'],
+  'L組':['陳春蓉','卓芷宣','張馨尹','陳品妍','郭怡珍','詹允茜','丁苡恩','鍾以晨','劉提敏','周芃言'],
+};
+
+function renderGroups() {
+  let html = '';
+  Object.entries(CT_GROUPS).forEach(([group, players]) => {
+    const isMale = 'ABCDEFG'.includes(group[0]);
+    const c = isMale ? '#3498db' : '#e74c3c';
+    html += `<div class="team-card" style="border-left:4px solid ${c}" data-group="${group}">
+      <div class="team-name" style="color:${c}">${group} <span style="color:#666;font-size:16px;font-weight:normal">${players.length}人</span></div>
+      <div class="tags">
+        ${players.map(p=>`<span class="gtag ptag">${p}</span>`).join('')}
+      </div>
+    </div>`;
+  });
+  document.getElementById('ct-group-wrap').innerHTML = html;
+}
+
+function ctGroupSearch(q) {
+  if (!document.getElementById('ct-group-wrap').innerHTML) renderGroups();
+  q = q.trim();
+  document.querySelectorAll('[data-group]').forEach(card => {
+    const tags = card.querySelectorAll('.gtag');
+    let found = 0;
+    tags.forEach(t => {
+      const match = !q || t.textContent.includes(q);
+      t.style.background = (match && q) ? '#1a3a5a' : '#222';
+      t.style.color = (match && q) ? '#fff' : '#ddd';
+      if (match) found++;
+    });
+    card.style.display = (!q || found > 0) ? '' : 'none';
+  });
 }
 
 const CT_SCHEDULE = [
@@ -196,7 +250,7 @@ const CT_SCHEDULE = [
 ];
 
 const CT_ROSTER = {
-  '男子第1隊':['楊子毅','蔡昱蘅','林郭州','林允','卓慈駿','徐勁文','彭楷竣','鄭松綠','施冠宇','羅祐翔','李坤鴻','彭驀','張立凱','何昕遠','曹崴紘','張瀚元','李翊誠','江國睿','董至桀'],
+  '男子第1隊':['楊子毅','蔡昱蘅','林郭州','林允','卓慈駿','徐勁文','彭楷竣','鄭松緣','施冠宇','羅祐翔','李坤鴻','彭驀','張立凱','何昕遠','曹崴紘','張瀚元','李翊誠','江國睿','董至桀'],
   '男子第2隊':['游松穎','張允盛','蔣承澔','劉承桓','林翊丞','游育霖','林恩旭','葉鍇睿','陳冠廷','顏呈翰','魏道綸','陳柏安','陳冠捷','李政璋','吳凱振','邱翊翔','陳泰宇','陳浩喆','李浩維'],
   '男子第3隊':['紀凱元','侯辰翰','陳以樂','葉鎧齊','王毓鋒','蕭敬恆','陳泰丞','林睿宇','詹上儀','陳炯元','林宥辰','陳守羿','張嘉哲','李曜宇','廖文煜','許語軒','陳亭旭','邱顯程','侯辰熹'],
   '男子第4隊':['楊苡銜','林靖堯','林寬','賴竑愷','王冠喆','梅拓允','楊長興','張書睿','劉冠廷','陳春柏','賴楨宸','陳律桓','蕭辰昀','洪郁善','杜炎','沈延霖','高皓晟','張祐綸','高皓瑄'],
