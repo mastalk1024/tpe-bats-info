@@ -79,8 +79,8 @@
   <!-- 培訓隊子分頁按鈕（切換到培訓隊時才顯示） -->
   <div id="ct-btns-wrap">
     <div class="ct-btns">
-      <button id="ct-btn-s" class="btn-active" onclick="ctSwitch('s')">📅 賽程</button>
-      <button id="ct-btn-t" class="btn-gray" onclick="ctSwitch('t')">🗓 訓練</button>
+      <button id="ct-btn-t" class="btn-active" onclick="ctSwitch('t')">🗓 訓練</button>
+      <button id="ct-btn-s" class="btn-gray" onclick="ctSwitch('s')">📅 賽程</button>
       <button id="ct-btn-g" class="btn-gray" onclick="ctSwitch('g')">🔠 分組</button>
       <button id="ct-btn-r" class="btn-gray" onclick="ctSwitch('r')">👥 名單</button>
     </div>
@@ -99,8 +99,8 @@
 
 <!-- 培訓隊 -->
 <div id="tab-ct" class="panel">
-  <div id="ct-s"></div>
-  <div id="ct-t" style="display:none"></div>
+  <div id="ct-t"></div>
+  <div id="ct-s" style="display:none"></div>
   <div id="ct-g" style="display:none">
     <input type="text" id="ct-gsearch" placeholder="🔍 搜尋球員姓名..." oninput="ctGroupSearch(this.value)">
     <div id="ct-group-wrap"></div>
