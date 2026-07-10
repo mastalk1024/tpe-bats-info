@@ -338,7 +338,7 @@ const CT_TRAINING = [
       { label:'第一梯次', group:'IJKL', fitness:'20:30-21:15', ice:'21:30-22:45'},
       { label:'第二梯次', group:'ABCD', fitness:'22:00-22:45', ice:'23:00-00:15'},
     ]},
-    { date:'7/10', day:'五', md:'0710', sessions:[
+    { date:'7/10', day:'五', md:'0710', warning:'🌀 巴威颱風停課一天，補課另行通知', sessions:[
       { label:'第一梯次', group:'IJKL', fitness:'20:30-21:15', ice:'21:30-22:45'},
       { label:'第二梯次', group:'EFGH', fitness:'22:00-22:45', ice:'23:00-00:15'},
     ]},
@@ -497,6 +497,9 @@ function renderTraining() {
           </div>
         </div>`;
       });
+      if (d.warning) {
+        html += `<div style="margin-top:10px;background:#2a0a0a;border:1px solid #cc2222;border-radius:8px;padding:10px 14px;color:#ff5555;font-size:16px;font-weight:bold;text-align:center;line-height:1.5">${d.warning}</div>`;
+      }
       html += '</div>';
     }
   });
