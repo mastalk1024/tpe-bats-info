@@ -43,7 +43,7 @@
   .team-card { background: #1a1a1a; border-radius: 10px; padding: 12px; margin-bottom: 10px; }
   .team-name { font-weight: bold; margin-bottom: 8px; font-size: 18px; }
   .tags { display: flex; flex-wrap: wrap; gap: 6px; }
-  .ptag { background: #222; border-radius: 6px; padding: 4px 10px; font-size: 17px; color: #ddd; }
+  .ptag { background: #222; border-radius: 6px; padding: 4px 8px; font-size: 14px; color: #ddd; }
   .badge { background: #3498db; color: #fff; border-radius: 5px; padding: 1px 7px; font-size: 15px; margin-left: 6px; }
   .badge-past { background: #333; color: #888; }
   .month-title { font-size: 19px; color: #ccc; font-weight: bold; margin: 16px 0 10px; border-bottom: 1px solid #222; padding-bottom: 6px; }
@@ -157,30 +157,42 @@ function ctSwitch(tab) {
 }
 
 const CT_GROUPS = {
-  'A組':['張允盛','紀凱元','林睿宇','陳炯元','林宥辰','楊長興','劉冠廷','崔碩恩','王詠喧','蔡承元','文培安','彭驀','李政璋','吳凱振','潘怡誠','李翊誠','高皓瑄'],
-  'B組':['彭楷竣','陳冠廷','賴竑愷','王冠喆','吳逸鋐','李立宸','郝羿翔','林宜寬','王冠堯','張瀚元','廖文煜','許語軒','洪郁善','高皓晟','彭立閔','陳泰宇','陳俐龍'],
-  'C組':['蔡昱蘅','鄭松緣','蔣承澔','劉承桓','顏呈翰','蕭敬恆','陳泰丞','陳守羿','林宏儒','廖品翔','卓立夏','陳柏安','陳冠捷','陳亭旭','沈延霖','江國睿','趙梓森'],
-  'D組':['卓慈駿','施冠宇','游松穎','游育霖','林恩旭','葉鍇睿','陳以樂','葉鎧齊','葉劉浩','何昕遠','曹崴紘','邱翊翔','張嘉哲','李曜宇','支紹權','陳浩喆','吳承晅'],
-  'E組':['楊子毅','羅祐翔','李坤鴻','王毓鋒','梅拓允','陳律桓','林子暘','李宜甫','哈勇·拉娃','林冠群','簡亦瑢','吳封廷','蔡承叡','劉睿然','董至桀','邱顯程','蕭又宸'],
-  'F組':['林靖堯','林寬','郭駿業','陳柏澔','詹舜宇','林宇軒','張立凱','蕭辰昀','宋沅澔','賴柏愷','林煒軒','白立煜','張祐綸','林宥丞'],
-  'G組':['林郭州','林允','徐勁文','林翊丞','魏道綸','侯辰翰','詹上儀','楊苡銜','張書睿','陳春柏','賴楨宸','施以諾','杜炎','許宬翊','李浩維','侯辰熹'],
-  'H組':['吳季慈','譚舒庭','謝知辰','黃筠筑','許庭毓','洪遠橋','張恩瑋','謝舒宇','余佳容','徐雨彤','林洋萁','張恩斌','沙云筠','黃敏娟','陳蓁潔','王韻慈','鍾愛'],
-  'I組':['王芮恩','童毓晴','高葦庭','徐可芯','林珊如','劉廷瑋','王璇','吳曉玥','張宥心','王書妤','鍾采媗','鍾情','詹禺羽','陳奕晴','邱奕婷'],
-  'J組':['蔡宛論','王芷妤','吳曉珮','鍾勻琤','梅千允','盧可婕','施樂佳','葉品妡','陳維潔','黃子庭','曾媗瑀','林永媞','梁羽彤','陳品潔','陳紫彤','林蔓妡'],
-  'K組':['廖又靚','王宥薇','曾千謙','姚皖芝','李昕容','游旻璇','陸欣妤','莊若莛','徐煜棠','賴渝宸','連曉晞','林宜嫻','王羿晴','葉珈妤'],
-  'L組':['陳春蓉','卓芷宣','張馨尹','陳品妍','郭怡珍','詹允茜','丁苡恩','鍾以晨','劉提敏','周芃言'],
+  'A組':{前鋒:['張允盛 (Tony)','林睿宇 (Jerry)','林宥辰 (Eugene)','劉冠廷 (Lucas)','文培安 (Patrick)','紀凱元 (KYLE)','陳炯元 (sparkle)','楊長興 (Gary)','崔碩恩 (Albert)','蔡承元 (Travis)'],後衛:['潘怡誠 (Jerry Pan)','彭驀 (Morris)','李政瑋 (Willie)','王詠暄 (Omar)','吳凱振 (Jay)','彭立閎 (Leo)'],守門:['李翊誠 (Andy)','高皓瑄 (justin)']},
+  'B組':{前鋒:['林宜寬 (Jonathan)','范毅丞 (Thomas)','彭楷竣 (Jerry)','賴竑愷 (Kamil)','吳逸銘 (Luke Wu)','郝羿翔 (Henry)','王冠堯 (Bruce)','陳冠廷 (William)','王冠喆 (Leo)','李立宸 (Ethan 多比)','蕭敬恆 (Sam)'],後衛:['高皓晟 (lucas)','廖文煜 (Cash)','洪郁善 (Ethan)','張瀚元 (HUNTER)','許語軒 (SAM)'],守門:['陳倒龍 (Lilong)','陳泰宇 (Thomas)']},
+  'C組':{前鋒:['蔡昱衡 (Xavier)','蔣承澔 (Jack)','顏呈翰 (Alston)','陳泰丞 (Max)','林宏儒 (Mike)','卓立夏 (Troy)','鄭松緣 (JINGKER)','劉承桓 (Wilson)','陳守羿 (Bruce)','廖品翔 (Jeremy)','羅祐翔 (Yuto)','陳以樂 (HEINO)'],後衛:['沈延霖 (Eric)','陳冠捷 (Austin)','陳柏妟 (Brian)','陳亭旭 (Terry)','張守博 (Bryan)'],守門:['江國睿 (Ray)','趙梓森 (Lawrence)']},
+  'D組':{前鋒:['林恩旭 (Albert)','葉劉浩 (Kenneth)','卓慈駿 (DINO)','施冠宇 (Kenny)','游宥霖 (Kevin)','葉鐿齊 (CHUCK YEH)','葉鐿睿 (RAY YEH)','楊子毅 (OLIVER)'],後衛:['曹崴紘 (Elliot)','邱翊翔 (Sean)','張嘉哲 (KARSTAN)','支紹權 (Sebastian)','何昕遠 (Mike)','李曜宇 (無)'],守門:['陳浩喆 (HAO)','吳承咼 (Yoan)']},
+  'E組':{前鋒:['梅拓允 (TROY)','李坤鴻 (kevin)','林子暘 (Patrick)','哈勇・拉娃 (Dylan)','簡亦璿 (Theo)','王毓鋒 (Yihou)','陳律桓 (Luka)','李宜甫 (Syuan)','林冠群 (LIN, JETT)'],後衛:['蔡承叡 (Rain)','吳封廷 (Ryan)','劉睿然 (無)'],守門:['董至傑 (Anders)','蕭又宸 (Josh)','邱顯程 (SHAWN)']},
+  'F組':{前鋒:['詹舜宇 (Jensen)','林宇軒 (Jaden)','林靖堯 (Daniel)','郭駿業 (JEREMY)','林寬 (Kris)','陳柏澔 (WILLIAM)'],後衛:['黃祈騯 (Max Huang)','王耀陞 (Tyler Wang)','蕭辰昀 (CY HSIAO)','白立煜 (Leon)','張立凱 (Ryan)','宋沅澔 (Gregory Sun)','賴柏愷 (Bentley)'],守門:['張祐綸 (Ryan)','林宥丞 (Justin)']},
+  'G組':{前鋒:['林羿州 (Dennis)','呂子明 (ALEX)','林允 (Nathan)','徐顓文 (Howard)','林翊丞 (Eason)','魏道綸 (Alen)','侯辰翰 (Eric)','賴楷宸 (Eden)','詹上儀 (Philip)','楊玟衡 (Ethan)','張書睿 (Curry)','陳春柏 (PoPo)','施以諾 (Ethan)'],後衛:['杜炎 (DU YAN)','許宬翊 (Ethan Hsu)'],守門:['侯辰熹 (Eric)','李浩維 (Adam)']},
+  'H組':{前鋒:['吳季慈 (yang)','謝知辰 (QQ)','許庭毓 (Tegan)','張恩瑋 (ERIN)','譚舒庭 (Sarah)','黃筠筑 (IRIS)','洪遠橋 (Jacqueline)','張恩婉 (Lannie)'],後衛:['余佳容 (YU)','林洋茉 (Angel)','沙云筠 (Ingrid)','陳韋潔 (Alison)','謝舒宇 (Sophia)','徐雨彤 (Hebe)','黃敏娟 (Jill)'],守門:['鍾愛 (Ai)','王韻慈 (Randy)']},
+  'I組':{前鋒:['王芮恩 (Ruei)','高葦庭 (Mimi)','林珊如 (Tintin)','王璇 (Michelle)','張宥心 (Yolanda)','童毓晴 (Claire)','徐可芯 (Coco)','劉廷瑋 (Nicole)','吳曉玥 (CHELSEA WU)','王書妤 (Abby)','鍾采媗 (BERNICE)'],後衛:['詹禺羽 (Grace)','鍾情 (沒有)'],守門:['邱奕婷 (TAMMY)','陳奕晴 (Joy)']},
+  'J組':{前鋒:['蔡宛諭 (Audris)','梅千允 (CHERRY)','施樂佳 (CARA)','陳維潔 (Alva)','王芷妤 (April)','鍾勻琤 (Anna)','盧可婕 (Ko-chieh Lu)','葉品妡 (Jo)','黃子庭 (Erin Huang)','吳曉珮 (LAURA WU)'],後衛:['曾媗瑀 (Jessie)','梁羽彤 (Dona)','林永媞 (Angela)'],守門:['陳品潔 (Jennifer)','陳紫彤 (Olivia)','林蔓妡 (Cindy)']},
+  'K組':{前鋒:['廖又靚 (YOU-JING)','曾千謙 (Becky)','李昕容 (Kelly)','陸欣妤 (Fiona)','徐煜棠 (HSU,YU-TANG)','王宥薇 (WANG, YU-TING)','姚皖芝 (丸子)','游旻璇 (Melody)','莊若莛 (Tina)'],後衛:['連曉晞 (Daisy)','林宜嫻 (Elyse)'],守門:['葉珈妤 (Olivia)','賴渝宸 (Muffy)','王羿晴 (Megan)']},
+  'L組':{前鋒:['陳春蓉 (ZOE)','卓芷宣 (Sally)'],後衛:['丁苡恩 (Claire)','陳品妍 (Pinny Chen)','詹允茜 (Chloe)'],守門:['鍾以晨 (Mia)','周芃言 (April)','劉提敏 (無)']},
 };
 
 function renderGroups() {
   let html = '';
+  const posLabel = {'前鋒':'⛸ 前鋒 FW','後衛':'🛡 後衛 DF','守門':'🥅 守門 GK'};
   Object.entries(CT_GROUPS).forEach(([group, players]) => {
     const isMale = 'ABCDEFG'.includes(group[0]);
     const c = isMale ? '#3498db' : '#e74c3c';
+    const isPositioned = !Array.isArray(players);
+    const total = isPositioned ? Object.values(players).flat().length : players.length;
+    let innerHtml = '';
+    if (isPositioned) {
+      Object.entries(players).forEach(([pos, plist]) => {
+        innerHtml += `<div style="font-size:13px;color:#888;margin:6px 0 3px">${posLabel[pos]||pos}</div>
+          <div class="tags" style="margin-bottom:2px">
+            ${plist.map(p=>`<span class="gtag ptag">${p}</span>`).join('')}
+          </div>`;
+      });
+    } else {
+      innerHtml = `<div class="tags">${players.map(p=>`<span class="gtag ptag">${p}</span>`).join('')}</div>`;
+    }
     html += `<div class="team-card" style="border-left:4px solid ${c}" data-group="${group}">
-      <div class="team-name" style="color:${c}">${group} <span style="color:#666;font-size:16px;font-weight:normal">${players.length}人</span></div>
-      <div class="tags">
-        ${players.map(p=>`<span class="gtag ptag">${p}</span>`).join('')}
-      </div>
+      <div class="team-name" style="color:${c}">${group} <span style="color:#666;font-size:16px;font-weight:normal">${total}人</span></div>
+      ${innerHtml}
     </div>`;
   });
   document.getElementById('ct-group-wrap').innerHTML = html;
@@ -250,16 +262,16 @@ const CT_SCHEDULE = [
 ];
 
 const CT_ROSTER = {
-  '男子第1隊':['楊子毅','蔡昱蘅','林郭州','林允','卓慈駿','徐勁文','彭楷竣','鄭松緣','施冠宇','羅祐翔','李坤鴻','彭驀','張立凱','何昕遠','曹崴紘','張瀚元','李翊誠','江國睿','董至桀'],
-  '男子第2隊':['游松穎','張允盛','蔣承澔','劉承桓','林翊丞','游育霖','林恩旭','葉鍇睿','陳冠廷','顏呈翰','魏道綸','陳柏安','陳冠捷','李政璋','吳凱振','邱翊翔','陳泰宇','陳浩喆','李浩維'],
-  '男子第3隊':['紀凱元','侯辰翰','陳以樂','葉鎧齊','王毓鋒','蕭敬恆','陳泰丞','林睿宇','詹上儀','陳炯元','林宥辰','陳守羿','張嘉哲','李曜宇','廖文煜','許語軒','陳亭旭','邱顯程','侯辰熹'],
-  '男子第4隊':['楊苡銜','林靖堯','林寬','賴竑愷','王冠喆','梅拓允','楊長興','張書睿','劉冠廷','陳春柏','賴楨宸','陳律桓','蕭辰昀','洪郁善','杜炎','沈延霖','高皓晟','張祐綸','高皓瑄'],
-  '男子第5隊':['吳逸鋐','李立宸','崔碩恩','王詠喧','郭駿業','陳柏澔','林子暘','郝羿翔','林宏儒','林宜寬','蔡承元','施以諾','吳封廷','潘怡誠','宋沅澔','賴柏愷','林煒軒','趙梓森','蕭又宸','林宥丞'],
-  '男子第6隊':['廖品翔','李宜甫','哈勇·拉娃','詹舜宇','文培安','王冠堯','林宇軒','林冠群','簡亦瑢','葉劉浩','卓立夏','彭立閔','許宬翊','蔡承叡','劉睿然','支紹權','白立煜','吳承晅','陳俐龍'],
-  '女子第1隊':['廖又靚','王宥薇','王芮恩','陳春蓉','吳季慈','譚舒庭','曾千謙','姚皖芝','童毓晴','蔡宛論','謝舒宇','郭怡珍','余佳容','徐雨彤','林洋萁','鍾以晨','陳品潔','王羿晴'],
-  '女子第2隊':['謝知辰','王芷妤','吳曉珮','高葦庭','卓芷宣','李昕容','黃筠筑','許庭毓','游旻璇','徐可芯','詹允茜','張恩斌','鍾情','丁苡恩','沙云筠','王韻慈','鍾愛','陳奕晴'],
-  '女子第3隊':['鍾勻琤','林珊如','張馨尹','洪遠橋','陸欣妤','劉廷瑋','梅千允','王璇','吳曉玥','莊若莛','徐煜棠','曾媗瑀','連曉晞','林宜嫻','黃敏娟','陳紫彤','葉珈妤','林蔓妡'],
-  '女子第4隊':['張宥心','陳品妍','張恩瑋','賴渝宸','盧可婕','施樂佳','王書妤','葉品妡','陳維潔','黃子庭','鍾采媗','詹禺羽','林永媞','梁羽彤','陳萃漾','邱奕婷','劉提敏','周芃言'],
+  '男子第1隊':{前鋒:['楊子毅 (OLIVER)','林羿州 (Dennis)','卓慈駿 (DINO)','彭楷竣 (Jerry)','施冠宇 (Kenny)','李坤鴻 (kevin)','林允 (Nathan)','徐顓文 (Howard)','鄭松緣 (JINGKER)','羅祐翔 (Yuto)','蔡昱衡 (Xavier)'],後衛:['黃祈騯 (Max Huang)','彭驀 (Morris)','張立凱 (Ryan)','曹崴紘 (Elliot)','何昕遠 (Mike)','張瀚元 (HUNTER)'],守門:['江國睿 (Ray)','李翊誠 (Andy)','董至傑 (Anders)']},
+  '男子第2隊':{前鋒:['蔣承澔 (Jack)','林翊丞 (Eason)','林恩旭 (Albert)','陳冠廷 (William)','魏道綸 (Alen)','張允盛 (Tony)','劉承桓 (Wilson)','游宥霖 (Kevin)','葉鐿睿 (RAY YEH)','顏呈翰 (Alston)'],後衛:['王耀陞 (Tyler Wang)','陳冠捷 (Austin)','吳凱振 (Jay)','張守博 (Bryan)','陳柏安 (Brian)','李政瑋 (Willie)','邱翊翔 (Sean)'],守門:['陳浩喆 (HAO)','陳泰宇 (Thomas)','李浩維 (Adam)']},
+  '男子第3隊':{前鋒:['紀凱元 (KYLE)','呂子明 (ALEX)','陳以樂 (HEINO)','王毓鋒 (Yihou)','陳泰丞 (Max)','詹上儀 (Philip)','林宥辰 (Eugene)','侯辰翰 (Eric)','葉鐿齊 (CHUCK YEH)','蕭敬恆 (Sam)','林睿宇 (Jerry)','陳炯元 (sparkle)','陳守羿 (Bruce)'],後衛:['張嘉哲 (KARSTAN)','廖文煜 (Cash)','陳亭旭 (Terry)','李曜宇 (無)','許語軒 (SAM)'],守門:['侯辰熹 (Eric)','邱顯程 (SHAWN)']},
+  '男子第4隊':{前鋒:['林寬','王冠喆','楊長興','劉冠廷','賴楷宸','林靖堯','賴竑愷','梅拓允','張書睿','陳春柏','陳律桓','楊玟衡'],後衛:['沈延霖','高皓晟','蕭辰昀','洪郁善','杜炎'],守門:['高皓瑄','張祐綸']},
+  '男子第5隊':{前鋒:['崔碩恩','林宜寬','郭駿業','林宏儒','李立宸','陳柏澔','郝羿翔','施以諾','吳逸銘','林子暘'],後衛:['潘怡誠','蔡承叡','吳封廷','宋沅澔','林煒軒','賴柏愷','王詠暄'],守門:['蕭又宸','趙梓森']},
+  '男子第6隊':{前鋒:['范毅丞','廖品翔','文培安','林宇軒','卓立夏','李宜甫','詹舜宇','王冠堯','林冠群','葉劉浩','哈勇・拉娃','簡亦璿'],後衛:['彭立閎','蔡承叡','支紹權','許宬翊','劉睿然','白立煜'],守門:['陳倒龍','吳承咼']},
+  '女子第1隊':{前鋒:['廖又靚 (YOU-JING)','王芮恩 (Ruei)','吳季慈 (yang)','曾千謙 (Becky)','王宥薇 (WANG, YU-TING)','陳春蓉 (ZOE)','譚舒庭 (Sarah)','姚皖芝 (丸子)'],後衛:['謝舒宇 (Sophia)','余佳容 (YU)','林洋茉 (Angel)','郭怡珍 (Maddie)','徐雨彤 (Hebe)'],守門:['陳品潔 (Jennifer)','鍾以晨 (Mia)','王羿晴 (Megan)']},
+  '女子第2隊':{前鋒:['謝知辰 (QQ)','吳曉珮 (LAURA WU)','卓芷宣 (Sally)','黃筠筑 (IRIS)','游旻璇 (Melody)','王芷妤 (April)','高葦庭 (Mimi)','李昕容 (Kelly)','徐可芯 (Coco)','張恩婉 (Lannie)'],後衛:['詹允茜 (Chloe)','鍾情 (沒有)','沙云筠 (Ingrid)','丁苡恩 (Claire)'],守門:['王韻慈 (Randy)']},
+  '女子第3隊':{前鋒:['鍾勻琤 (Anna)','張馨尹 (Abbie)','陸欣妤 (Fiona)','梅千允 (CHERRY)','吳曉玥 (CHELSEA WU)','徐煜棠 (HSU,YU-TANG)','林珊如 (Tintin)','洪遠橋 (Jacqueline)','劉廷瑋 (Nicole)','王璇 (Michelle)','莊若莛 (Tina)'],後衛:['連曉晞 (Daisy)','黃敏娟 (Jill)','曾媗瑀 (Jessie)','林宜嫻 (Elyse)'],守門:['葉珈妤 (Olivia)','陳紫彤 (Olivia)','林蔓妡 (Cindy)']},
+  '女子第4隊':{前鋒:['張宥心 (Yolanda)','張恩瑋 (ERIN)','施樂佳 (CARA)','葉品妡 (Jo)','盧可婕 (Ko-chieh Lu)','王書妤 (Abby)','陳維潔 (Alva)','鍾采媗 (BERNICE)'],後衛:['詹禺羽 (Grace)','梁羽彤 (Dona)','陳品妍 (Pinny Chen)','林永媞 (Angela)'],守門:['徐子庭 (Tiffany)','邱奕婷 (TAMMY)','周芃言 (April)','劉提敏 (無)','賴渝宸 (Muffy)']},
 };
 
 function renderSchedule() {
@@ -299,14 +311,26 @@ function renderSchedule() {
 
 function renderRoster() {
   let html = '';
+  const posLabel = {'前鋒':'⛸ 前鋒 FW','後衛':'🛡 後衛 DF','守門':'🥅 守門 GK'};
   Object.entries(CT_ROSTER).forEach(([team, players]) => {
     const isMale = team.startsWith('男');
     const c = isMale ? '#3498db' : '#e74c3c';
+    const isPositioned = !Array.isArray(players);
+    const total = isPositioned ? Object.values(players).flat().length : players.length;
+    let innerHtml = '';
+    if (isPositioned) {
+      Object.entries(players).forEach(([pos, plist]) => {
+        innerHtml += `<div style="font-size:13px;color:#888;margin:6px 0 3px">${posLabel[pos]||pos}</div>
+          <div class="tags" style="margin-bottom:2px">
+            ${plist.map(p=>`<span class="ptag">${p}</span>`).join('')}
+          </div>`;
+      });
+    } else {
+      innerHtml = `<div class="tags">${players.map(p=>`<span class="ptag">${p}</span>`).join('')}</div>`;
+    }
     html += `<div class="team-card" style="border-left:4px solid ${c}" data-team="${team}">
-      <div class="team-name" style="color:${c}">${team} <span style="color:#666;font-size:16px;font-weight:normal">${players.length}人</span></div>
-      <div class="tags">
-        ${players.map(p=>`<span class="ptag">${p}</span>`).join('')}
-      </div>
+      <div class="team-name" style="color:${c}">${team} <span style="color:#666;font-size:16px;font-weight:normal">${total}人</span></div>
+      ${innerHtml}
     </div>`;
   });
   document.getElementById('ct-roster-wrap').innerHTML = html;
