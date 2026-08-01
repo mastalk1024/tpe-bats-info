@@ -158,12 +158,12 @@ function ctSwitch(tab) {
 
 const CT_GROUPS = {
   'A組':{前鋒:['張允盛 (Tony)','林睿宇 (Jerry)','林宥辰 (Eugene)','劉冠廷 (Lucas)','文培安 (Patrick)','紀凱元 (KYLE)','陳炯元 (sparkle)','楊長興 (Gary)','崔碩恩 (Albert)','蔡承元 (Travis)'],後衛:['潘怡誠 (Jerry Pan)','彭驀 (Morris)','李政瑋 (Willie)','王詠暄 (Omar)','吳凱振 (Jay)','彭立閎 (Leo)'],守門:['李翊誠 (Andy)','高皓瑄 (justin)']},
-  'B組':{前鋒:['林宜寬 (Jonathan)','范毅丞 (Thomas)','彭楷竣 (Jerry)','賴竑愷 (Kamil)','吳逸銘 (Luke Wu)','郝羿翔 (Henry)','王冠堯 (Bruce)','陳冠廷 (William)','王冠喆 (Leo)','李立宸 (Ethan 多比)','蕭敬恆 (Sam)'],後衛:['高皓晟 (lucas)','廖文煜 (Cash)','洪郁善 (Ethan)','張瀚元 (HUNTER)','許語軒 (SAM)'],守門:['陳倒龍 (Lilong)','陳泰宇 (Thomas)']},
-  'C組':{前鋒:['蔡昱衡 (Xavier)','蔣承澔 (Jack)','顏呈翰 (Alston)','陳泰丞 (Max)','林宏儒 (Mike)','卓立夏 (Troy)','鄭松緣 (JINGKER)','劉承桓 (Wilson)','陳守羿 (Bruce)','廖品翔 (Jeremy)','羅祐翔 (Yuto)','陳以樂 (HEINO)'],後衛:['沈延霖 (Eric)','陳冠捷 (Austin)','陳柏妟 (Brian)','陳亭旭 (Terry)','張守博 (Bryan)'],守門:['江國睿 (Ray)','趙梓森 (Lawrence)']},
+  'B組':{前鋒:['林宜寬 (Jonathan)','范毅丞 (Thomas)','彭楷竣 (Jerry)','賴竑愷 (Kamil)','吳逸銘 (Luke Wu)','郝羿翔 (Henry)','王冠堯 (Bruce)','陳冠廷 (William)','王冠喆 (Leo)','李立宸 (Ethan 多比)','蕭敬恆 (Sam)'],後衛:['高皓晟 (lucas)','廖文煜 (Cash)','洪郁善 (Ethan)','張瀚元 (HUNTER)','許語軒 (SAM)'],守門:['陳俐龍 (Lilong)','陳泰宇 (Thomas)']},
+  'C組':{前鋒:['蔡昱蘅 (Xavier)','蔣承澔 (Jack)','顏呈翰 (Alston)','陳泰丞 (Max)','林宏儒 (Mike)','卓立夏 (Troy)','鄭松緣 (JINGKER)','劉承桓 (Wilson)','陳守羿 (Bruce)','廖品翔 (Jeremy)','羅祐翔 (Yuto)','陳以樂 (HEINO)'],後衛:['沈延霖 (Eric)','陳冠捷 (Austin)','陳柏妟 (Brian)','陳亭旭 (Terry)','張守博 (Bryan)'],守門:['江國睿 (Ray)','趙梓森 (Lawrence)']},
   'D組':{前鋒:['林恩旭 (Albert)','葉劉浩 (Kenneth)','卓慈駿 (DINO)','施冠宇 (Kenny)','游宥霖 (Kevin)','葉鐿齊 (CHUCK YEH)','葉鐿睿 (RAY YEH)','楊子毅 (OLIVER)'],後衛:['曹崴紘 (Elliot)','邱翊翔 (Sean)','張嘉哲 (KARSTAN)','支紹權 (Sebastian)','何昕遠 (Mike)','李曜宇 (無)'],守門:['陳浩喆 (HAO)','吳承咼 (Yoan)']},
   'E組':{前鋒:['梅拓允 (TROY)','李坤鴻 (kevin)','林子暘 (Patrick)','哈勇・拉娃 (Dylan)','簡亦璿 (Theo)','王毓鋒 (Yihou)','陳律桓 (Luka)','李宜甫 (Syuan)','林冠群 (LIN, JETT)'],後衛:['蔡承叡 (Rain)','吳封廷 (Ryan)','劉睿然 (無)'],守門:['董至傑 (Anders)','蕭又宸 (Josh)','邱顯程 (SHAWN)']},
   'F組':{前鋒:['詹舜宇 (Jensen)','林宇軒 (Jaden)','林靖堯 (Daniel)','郭駿業 (JEREMY)','林寬 (Kris)','陳柏澔 (WILLIAM)'],後衛:['黃祈騯 (Max Huang)','王耀陞 (Tyler Wang)','蕭辰昀 (CY HSIAO)','白立煜 (Leon)','張立凱 (Ryan)','宋沅澔 (Gregory Sun)','賴柏愷 (Bentley)'],守門:['張祐綸 (Ryan)','林宥丞 (Justin)']},
-  'G組':{前鋒:['林羿州 (Dennis)','呂子明 (ALEX)','林允 (Nathan)','徐顓文 (Howard)','林翊丞 (Eason)','魏道綸 (Alen)','侯辰翰 (Eric)','賴楷宸 (Eden)','詹上儀 (Philip)','楊玟衡 (Ethan)','張書睿 (Curry)','陳春柏 (PoPo)','施以諾 (Ethan)'],後衛:['杜炎 (DU YAN)','許宬翊 (Ethan Hsu)'],守門:['侯辰熹 (Eric)','李浩維 (Adam)']},
+  'G組':{前鋒:['林羿州 (Dennis)','呂子明 (ALEX)','林允 (Nathan)','徐顓文 (Howard)','林翊丞 (Eason)','魏道綸 (Alen)','侯辰翰 (Eric)','賴楷宸 (Eden)','詹上儀 (Philip)','楊苡銜 (Ethan)','張書睿 (Curry)','陳春柏 (PoPo)','施以諾 (Ethan)'],後衛:['杜炎 (DU YAN)','許宬翊 (Ethan Hsu)'],守門:['侯辰熹 (Eric)','李浩維 (Adam)']},
   'H組':{前鋒:['吳季慈 (yang)','謝知辰 (QQ)','許庭毓 (Tegan)','張恩瑋 (ERIN)','譚舒庭 (Sarah)','黃筠筑 (IRIS)','洪遠橋 (Jacqueline)','張恩婉 (Lannie)'],後衛:['余佳容 (YU)','林洋茉 (Angel)','沙云筠 (Ingrid)','陳韋潔 (Alison)','謝舒宇 (Sophia)','徐雨彤 (Hebe)','黃敏娟 (Jill)'],守門:['鍾愛 (Ai)','王韻慈 (Randy)']},
   'I組':{前鋒:['王芮恩 (Ruei)','高葦庭 (Mimi)','林珊如 (Tintin)','王璇 (Michelle)','張宥心 (Yolanda)','童毓晴 (Claire)','徐可芯 (Coco)','劉廷瑋 (Nicole)','吳曉玥 (CHELSEA WU)','王書妤 (Abby)','鍾采媗 (BERNICE)'],後衛:['詹禺羽 (Grace)','鍾情 (沒有)'],守門:['邱奕婷 (TAMMY)','陳奕晴 (Joy)']},
   'J組':{前鋒:['蔡宛諭 (Audris)','梅千允 (CHERRY)','施樂佳 (CARA)','陳維潔 (Alva)','王芷妤 (April)','鍾勻琤 (Anna)','盧可婕 (Ko-chieh Lu)','葉品妡 (Jo)','黃子庭 (Erin Huang)','吳曉珮 (LAURA WU)'],後衛:['曾媗瑀 (Jessie)','梁羽彤 (Dona)','林永媞 (Angela)'],守門:['陳品潔 (Jennifer)','陳紫彤 (Olivia)','林蔓妡 (Cindy)']},
@@ -262,12 +262,12 @@ const CT_SCHEDULE = [
 ];
 
 const CT_ROSTER = {
-  '男子第1隊':{前鋒:['楊子毅 (OLIVER)','林羿州 (Dennis)','卓慈駿 (DINO)','彭楷竣 (Jerry)','施冠宇 (Kenny)','李坤鴻 (kevin)','林允 (Nathan)','徐顓文 (Howard)','鄭松緣 (JINGKER)','羅祐翔 (Yuto)','蔡昱衡 (Xavier)'],後衛:['黃祈騯 (Max Huang)','彭驀 (Morris)','張立凱 (Ryan)','曹崴紘 (Elliot)','何昕遠 (Mike)','張瀚元 (HUNTER)'],守門:['江國睿 (Ray)','李翊誠 (Andy)','董至傑 (Anders)']},
+  '男子第1隊':{前鋒:['楊子毅 (OLIVER)','林羿州 (Dennis)','卓慈駿 (DINO)','彭楷竣 (Jerry)','施冠宇 (Kenny)','李坤鴻 (kevin)','林允 (Nathan)','徐顓文 (Howard)','鄭松緣 (JINGKER)','羅祐翔 (Yuto)','蔡昱蘅 (Xavier)'],後衛:['黃祈騯 (Max Huang)','彭驀 (Morris)','張立凱 (Ryan)','曹崴紘 (Elliot)','何昕遠 (Mike)','張瀚元 (HUNTER)'],守門:['江國睿 (Ray)','李翊誠 (Andy)','董至傑 (Anders)']},
   '男子第2隊':{前鋒:['蔣承澔 (Jack)','林翊丞 (Eason)','林恩旭 (Albert)','陳冠廷 (William)','魏道綸 (Alen)','張允盛 (Tony)','劉承桓 (Wilson)','游宥霖 (Kevin)','葉鐿睿 (RAY YEH)','顏呈翰 (Alston)'],後衛:['王耀陞 (Tyler Wang)','陳冠捷 (Austin)','吳凱振 (Jay)','張守博 (Bryan)','陳柏安 (Brian)','李政瑋 (Willie)','邱翊翔 (Sean)'],守門:['陳浩喆 (HAO)','陳泰宇 (Thomas)','李浩維 (Adam)']},
   '男子第3隊':{前鋒:['紀凱元 (KYLE)','呂子明 (ALEX)','陳以樂 (HEINO)','王毓鋒 (Yihou)','陳泰丞 (Max)','詹上儀 (Philip)','林宥辰 (Eugene)','侯辰翰 (Eric)','葉鐿齊 (CHUCK YEH)','蕭敬恆 (Sam)','林睿宇 (Jerry)','陳炯元 (sparkle)','陳守羿 (Bruce)'],後衛:['張嘉哲 (KARSTAN)','廖文煜 (Cash)','陳亭旭 (Terry)','李曜宇 (無)','許語軒 (SAM)'],守門:['侯辰熹 (Eric)','邱顯程 (SHAWN)']},
-  '男子第4隊':{前鋒:['林寬','王冠喆','楊長興','劉冠廷','賴楷宸','林靖堯','賴竑愷','梅拓允','張書睿','陳春柏','陳律桓','楊玟衡'],後衛:['沈延霖','高皓晟','蕭辰昀','洪郁善','杜炎'],守門:['高皓瑄','張祐綸']},
+  '男子第4隊':{前鋒:['林寬','王冠喆','楊長興','劉冠廷','賴楷宸','林靖堯','賴竑愷','梅拓允','張書睿','陳春柏','陳律桓','楊苡銜'],後衛:['沈延霖','高皓晟','蕭辰昀','洪郁善','杜炎'],守門:['高皓瑄','張祐綸']},
   '男子第5隊':{前鋒:['崔碩恩','林宜寬','郭駿業','林宏儒','李立宸','陳柏澔','郝羿翔','施以諾','吳逸銘','林子暘'],後衛:['潘怡誠','蔡承叡','吳封廷','宋沅澔','林煒軒','賴柏愷','王詠暄'],守門:['蕭又宸','趙梓森']},
-  '男子第6隊':{前鋒:['范毅丞','廖品翔','文培安','林宇軒','卓立夏','李宜甫','詹舜宇','王冠堯','林冠群','葉劉浩','哈勇・拉娃','簡亦璿'],後衛:['彭立閎','蔡承叡','支紹權','許宬翊','劉睿然','白立煜'],守門:['陳倒龍','吳承咼']},
+  '男子第6隊':{前鋒:['范毅丞','廖品翔','文培安','林宇軒','卓立夏','李宜甫','詹舜宇','王冠堯','林冠群','葉劉浩','哈勇・拉娃','簡亦璿'],後衛:['彭立閎','蔡承叡','支紹權','許宬翊','劉睿然','白立煜'],守門:['陳俐龍','吳承咼']},
   '女子第1隊':{前鋒:['廖又靚 (YOU-JING)','王芮恩 (Ruei)','吳季慈 (yang)','曾千謙 (Becky)','王宥薇 (WANG, YU-TING)','陳春蓉 (ZOE)','譚舒庭 (Sarah)','姚皖芝 (丸子)'],後衛:['謝舒宇 (Sophia)','余佳容 (YU)','林洋茉 (Angel)','郭怡珍 (Maddie)','徐雨彤 (Hebe)'],守門:['陳品潔 (Jennifer)','鍾以晨 (Mia)','王羿晴 (Megan)']},
   '女子第2隊':{前鋒:['謝知辰 (QQ)','吳曉珮 (LAURA WU)','卓芷宣 (Sally)','黃筠筑 (IRIS)','游旻璇 (Melody)','王芷妤 (April)','高葦庭 (Mimi)','李昕容 (Kelly)','徐可芯 (Coco)','張恩婉 (Lannie)'],後衛:['詹允茜 (Chloe)','鍾情 (沒有)','沙云筠 (Ingrid)','丁苡恩 (Claire)'],守門:['王韻慈 (Randy)']},
   '女子第3隊':{前鋒:['鍾勻琤 (Anna)','張馨尹 (Abbie)','陸欣妤 (Fiona)','梅千允 (CHERRY)','吳曉玥 (CHELSEA WU)','徐煜棠 (HSU,YU-TANG)','林珊如 (Tintin)','洪遠橋 (Jacqueline)','劉廷瑋 (Nicole)','王璇 (Michelle)','莊若莛 (Tina)'],後衛:['連曉晞 (Daisy)','黃敏娟 (Jill)','曾媗瑀 (Jessie)','林宜嫻 (Elyse)'],守門:['葉珈妤 (Olivia)','陳紫彤 (Olivia)','林蔓妡 (Cindy)']},
