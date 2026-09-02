@@ -157,39 +157,32 @@ function ctSwitch(tab) {
 }
 
 const CT_GROUPS = {
-  'A組':{前鋒:['張允盛 (Tony)','林睿宇 (Jerry)','林宥辰 (Eugene)','劉冠廷 (Lucas)','文培安 (Patrick)','紀凱元 (KYLE)','陳炯元 (sparkle)','楊長興 (Gary)','崔碩恩 (Albert)','蔡承元 (Travis)'],後衛:['潘怡誠 (Jerry Pan)','彭驀 (Morris)','李政瑋 (Willie)','王詠暄 (Omar)','吳凱振 (Jay)','彭立閎 (Leo)'],守門:['李翊誠 (Andy)','高皓瑄 (justin)']},
-  'B組':{前鋒:['林宜寬 (Jonathan)','范毅丞 (Thomas)','彭楷竣 (Jerry)','賴竑愷 (Kamil)','吳逸銘 (Luke Wu)','郝羿翔 (Henry)','王冠堯 (Bruce)','陳冠廷 (William)','王冠喆 (Leo)','李立宸 (Ethan 多比)','蕭敬恆 (Sam)'],後衛:['高皓晟 (lucas)','廖文煜 (Cash)','洪郁善 (Ethan)','張瀚元 (HUNTER)','許語軒 (SAM)'],守門:['陳俐龍 (Lilong)','陳泰宇 (Thomas)']},
-  'C組':{前鋒:['蔡昱蘅 (Xavier)','蔣承澔 (Jack)','顏呈翰 (Alston)','陳泰丞 (Max)','林宏儒 (Mike)','卓立夏 (Troy)','鄭松緣 (JINGKER)','劉承桓 (Wilson)','陳守羿 (Bruce)','廖品翔 (Jeremy)','羅祐翔 (Yuto)','陳以樂 (HEINO)'],後衛:['沈延霖 (Eric)','陳冠捷 (Austin)','陳柏安 (Brian)','陳亭旭 (Terry)','張守博 (Bryan)'],守門:['江國睿 (Ray)','趙梓森 (Lawrence)']},
-  'D組':{前鋒:['林恩旭 (Albert)','葉劉浩 (Kenneth)','卓慈駿 (DINO)','施冠宇 (Kenny)','游宥霖 (Kevin)','葉鐿齊 (CHUCK YEH)','葉鐿睿 (RAY YEH)','楊子毅 (OLIVER)'],後衛:['曹崴紘 (Elliot)','邱翊翔 (Sean)','張嘉哲 (KARSTAN)','支紹權 (Sebastian)','何昕遠 (Mike)','李曜宇 (無)'],守門:['陳浩喆 (HAO)','吳承咼 (Yoan)']},
-  'E組':{前鋒:['梅拓允 (TROY)','李坤鴻 (kevin)','林子暘 (Patrick)','哈勇・拉娃 (Dylan)','簡亦璿 (Theo)','王毓鋒 (Yihou)','陳律桓 (Luka)','李宜甫 (Syuan)','林冠群 (LIN, JETT)'],後衛:['蔡承叡 (Rain)','吳封廷 (Ryan)','劉睿然 (無)'],守門:['董至桀 (Anders)','蕭又宸 (Josh)','邱顯程 (SHAWN)']},
-  'F組':{前鋒:['詹舜宇 (Jensen)','林宇軒 (Jaden)','林靖堯 (Daniel)','郭駿業 (JEREMY)','林寬 (Kris)','陳柏澔 (WILLIAM)'],後衛:['黃祈騯 (Max Huang)','王耀陞 (Tyler Wang)','蕭辰昀 (CY HSIAO)','白立煜 (Leon)','張立凱 (Ryan)','宋沅澔 (Gregory Sun)','賴柏愷 (Bentley)'],守門:['張祐綸 (Ryan)','林宥丞 (Justin)']},
-  'G組':{前鋒:['林羿州 (Dennis)','呂子明 (ALEX)','林允 (Nathan)','徐顓文 (Howard)','林翊丞 (Eason)','魏道綸 (Alen)','侯辰翰 (Eric)','賴楷宸 (Eden)','詹上儀 (Philip)','楊苡銜 (Ethan)','張書睿 (Curry)','陳春柏 (PoPo)','施以諾 (Ethan)'],後衛:['杜炎 (DU YAN)','許宬翊 (Ethan Hsu)'],守門:['侯辰熹 (Eric)','李浩維 (Adam)']},
-  'H組':{前鋒:['吳季慈 (yang)','謝知辰 (QQ)','許庭毓 (Tegan)','張恩瑋 (ERIN)','譚舒庭 (Sarah)','黃筠筑 (IRIS)','洪遠橋 (Jacqueline)','張恩婉 (Lannie)'],後衛:['余佳容 (YU)','林洋茉 (Angel)','沙云筠 (Ingrid)','陳韋潔 (Alison)','謝舒宇 (Sophia)','徐雨彤 (Hebe)','黃敏娟 (Jill)'],守門:['鍾愛 (Ai)','王韻慈 (Randy)']},
-  'I組':{前鋒:['王芮恩 (Ruei)','高葦庭 (Mimi)','林珊如 (Tintin)','王璇 (Michelle)','張宥心 (Yolanda)','童毓晴 (Claire)','徐可芯 (Coco)','劉廷瑋 (Nicole)','吳曉玥 (CHELSEA WU)','王書妤 (Abby)','鍾采媗 (BERNICE)'],後衛:['詹禺羽 (Grace)','鍾情 (沒有)'],守門:['邱奕婷 (TAMMY)','陳奕晴 (Joy)']},
-  'J組':{前鋒:['蔡宛諭 (Audris)','梅千允 (CHERRY)','施樂佳 (CARA)','陳維潔 (Alva)','王芷妤 (April)','鍾勻琤 (Anna)','盧可婕 (Ko-chieh Lu)','葉品妡 (Jo)','黃子庭 (Erin Huang)','吳曉珮 (LAURA WU)'],後衛:['曾媗瑀 (Jessie)','梁羽彤 (Dona)','林永媞 (Angela)'],守門:['陳品潔 (Jennifer)','陳紫彤 (Olivia)','林蔓妡 (Cindy)']},
-  'K組':{前鋒:['廖又靚 (YOU-JING)','曾千謙 (Becky)','李昕容 (Kelly)','陸欣妤 (Fiona)','徐煜棠 (HSU,YU-TANG)','王宥薇 (WANG, YU-TING)','姚皖芝 (丸子)','游旻璇 (Melody)','莊若莛 (Tina)'],後衛:['連曉晞 (Daisy)','林宜嫻 (Elyse)'],守門:['葉珈妤 (Olivia)','賴渝宸 (Muffy)','王羿晴 (Megan)']},
-  'L組':{前鋒:['陳春蓉 (ZOE)','卓芷宣 (Sally)'],後衛:['丁苡恩 (Claire)','陳品妍 (Pinny Chen)','詹允茜 (Chloe)'],守門:['鍾以晨 (Mia)','周芃言 (April)','劉提敏 (無)']},
+  '中華紅':{coach:'張維庭',前鋒:['林子暘','林靖堯','廖品翔','施冠宇','楊長興','賴楷宸','侯辰翰','彭楷竣','徐顥文','陳炯元','羅祐翔','林睿宇'],後衛:['陳冠捷','潘怡誠','劉睿然','廖文煜','支紹權','賴柏愷','張嘉哲'],守門:['李翊誠','董至桀','陳浩喆']},
+  '中華藍':{coach:'黃仁宏',前鋒:['林恩旭','林寬','范毅丞','詹舜宇','林冠群','蔡承元','王毓鋒','蔣承澔','鄭松緣','陳以樂','卓立夏','張允盛','林宜寬','林宏儒'],後衛:['彭驀','宋沅澔','蕭辰昀','許語軒','張瀚元','沈延霖'],守門:['吳承晅','邱顯程']},
+  '中華白':{coach:'周宏炫',前鋒:['梅拓允','賴竑愷','王冠堯','楊子毅','郭駿業','文培安','陳律桓','劉承桓','葉鎧齊','崔碩恩','王冠喆','哈勇・拉娃'],後衛:['曹崴紘','杜炎','彭立閎','王詠暄','邱翊翔','洪郁善'],守門:['林宥丞','陳泰宇']},
+  '中華黑':{coach:'楊長霖',前鋒:['林宥辰','葉鎧睿','陳柏澔','陳守羿','紀凱元','卓慈駿','游宥霖','陳冠廷','李坤鴻','魏道綸','李立宸','劉冠廷','蔡昱蘅'],後衛:['蔡承叡','黃祈驊','高皓晟','陳柏安','吳凱振','何昕遠'],守門:['張祐綸','高皓晉']},
 };
 
 function renderGroups() {
   let html = '';
-  const posLabel = {'前鋒':'⛸ 前鋒 FW','後衛':'🛡 後衛 DF','守門':'🥅 守門 GK'};
-  Object.entries(CT_GROUPS).forEach(([group, players]) => {
-    const isMale = 'ABCDEFG'.includes(group[0]);
-    const c = isMale ? '#3498db' : '#e74c3c';
-    const isPositioned = !Array.isArray(players);
-    const total = isPositioned ? Object.values(players).flat().length : players.length;
+  const posLabel = {'前鋒':'⛸ 前鋒 FW','後衛':'🛡 後衛 DF','守門':'🥅 守門 GK','球員':'⛸ 球員'};
+  const teamColors = {'中華紅':'#e74c3c','中華藍':'#3498db','中華白':'#aaaaaa','中華黑':'#777777'};
+  Object.entries(CT_GROUPS).forEach(([group, data]) => {
+    const c = teamColors[group] || '#3498db';
+    const coach = data.coach || '';
+    const posEntries = Object.entries(data).filter(([k]) => k !== 'coach');
+    const total = posEntries.reduce((s, [,v]) => s + (Array.isArray(v) ? v.length : 0), 0);
     let innerHtml = '';
-    if (isPositioned) {
-      Object.entries(players).forEach(([pos, plist]) => {
-        innerHtml += `<div style="font-size:13px;color:#888;margin:6px 0 3px">${posLabel[pos]||pos}</div>
-          <div class="tags" style="margin-bottom:2px">
-            ${plist.map(p=>`<span class="gtag ptag">${p}</span>`).join('')}
-          </div>`;
-      });
-    } else {
-      innerHtml = `<div class="tags">${players.map(p=>`<span class="gtag ptag">${p}</span>`).join('')}</div>`;
+    if (coach) {
+      innerHtml += `<div style="font-size:13px;color:#888;margin:0 0 8px">教練：${coach}</div>`;
     }
+    posEntries.forEach(([pos, plist]) => {
+      if (!Array.isArray(plist)) return;
+      innerHtml += `<div style="font-size:13px;color:#888;margin:6px 0 3px">${posLabel[pos]||pos}</div>
+        <div class="tags" style="margin-bottom:2px">
+          ${plist.map(p=>`<span class="gtag ptag">${p}</span>`).join('')}
+        </div>`;
+    });
     html += `<div class="team-card" style="border-left:4px solid ${c}" data-group="${group}">
       <div class="team-name" style="color:${c}">${group} <span style="color:#666;font-size:16px;font-weight:normal">${total}人</span></div>
       ${innerHtml}
@@ -293,67 +286,77 @@ const CT_SCHEDULE = [
 ];
 
 const CT_ROSTER = {
-  '男子第1隊':{前鋒:['楊子毅 (OLIVER)','林羿州 (Dennis)','卓慈駿 (DINO)','彭楷竣 (Jerry)','施冠宇 (Kenny)','李坤鴻 (kevin)','林允 (Nathan)','徐顓文 (Howard)','鄭松緣 (JINGKER)','羅祐翔 (Yuto)','蔡昱蘅 (Xavier)'],後衛:['黃祈騯 (Max Huang)','彭驀 (Morris)','張立凱 (Ryan)','曹崴紘 (Elliot)','何昕遠 (Mike)','張瀚元 (HUNTER)'],守門:['江國睿 (Ray)','李翊誠 (Andy)','董至桀 (Anders)']},
-  '男子第2隊':{前鋒:['蔣承澔 (Jack)','林翊丞 (Eason)','林恩旭 (Albert)','陳冠廷 (William)','魏道綸 (Alen)','張允盛 (Tony)','劉承桓 (Wilson)','游宥霖 (Kevin)','葉鐿睿 (RAY YEH)','顏呈翰 (Alston)'],後衛:['王耀陞 (Tyler Wang)','陳冠捷 (Austin)','吳凱振 (Jay)','張守博 (Bryan)','陳柏安 (Brian)','李政瑋 (Willie)','邱翊翔 (Sean)'],守門:['陳浩喆 (HAO)','陳泰宇 (Thomas)','李浩維 (Adam)']},
-  '男子第3隊':{前鋒:['紀凱元 (KYLE)','呂子明 (ALEX)','陳以樂 (HEINO)','王毓鋒 (Yihou)','陳泰丞 (Max)','詹上儀 (Philip)','林宥辰 (Eugene)','侯辰翰 (Eric)','葉鐿齊 (CHUCK YEH)','蕭敬恆 (Sam)','林睿宇 (Jerry)','陳炯元 (sparkle)','陳守羿 (Bruce)'],後衛:['張嘉哲 (KARSTAN)','廖文煜 (Cash)','陳亭旭 (Terry)','李曜宇 (無)','許語軒 (SAM)'],守門:['侯辰熹 (Eric)','邱顯程 (SHAWN)']},
-  '男子第4隊':{前鋒:['林寬 (Kris)','王冠喆 (Leo)','楊長興 (Gary)','劉冠廷 (Lucas)','賴楷宸 (Eden)','林靖堯 (Daniel)','賴竑愷 (Kamil)','梅拓允 (TROY)','張書睿 (Curry)','陳春柏 (PoPo)','陳律桓 (Luka)','楊苡銜 (Ethan)'],後衛:['沈延霖 (Eric)','高皓晟 (lucas)','蕭辰昀 (CY HSIAO)','洪郁善 (Ethan)','杜炎 (DU YAN)'],守門:['高皓瑄 (justin)','張祐綸 (Ryan)']},
-  '男子第5隊':{前鋒:['崔碩恩 (Albert)','林宜寬 (Jonathan)','郭駿業 (JEREMY)','林宏儒 (Mike)','李立宸 (Ethan 多比)','陳柏澔 (WILLIAM)','郝羿翔 (Henry)','施以諾 (Ethan)','吳逸銘 (Luke Wu)','林子暘 (Patrick)'],後衛:['潘怡誠 (Jerry Pan)','蔡承叡 (Rain)','吳封廷 (Ryan)','宋沅澔 (Gregory Sun)','林煒軒 (RYAN)','賴柏愷 (Bentley)','王詠暄 (Omar)'],守門:['蕭又宸 (Josh)','趙梓森 (Lawrence)']},
-  '男子第6隊':{前鋒:['范毅丞 (Thomas)','廖品翔 (Jeremy)','文培安 (Patrick)','林宇軒 (Jaden)','卓立夏 (Troy)','李宜甫 (Syuan)','詹舜宇 (Jensen)','王冠堯 (Bruce)','林冠群 (LIN, JETT)','葉劉浩 (Kenneth)','哈勇・拉娃 (Dylan)','簡亦璿 (Theo)'],後衛:['彭立閎 (Leo)','蔡承叡 (Rain)','支紹權 (Sebastian)','許宬翊 (Ethan Hsu)','劉睿然 (無)','白立煜 (Leon)'],守門:['陳俐龍 (Lilong)','吳承咼 (Yoan)']},
-  '女子第1隊':{前鋒:['廖又靚 (YOU-JING)','王芮恩 (Ruei)','吳季慈 (yang)','曾千謙 (Becky)','王宥薇 (WANG, YU-TING)','陳春蓉 (ZOE)','譚舒庭 (Sarah)','姚皖芝 (丸子)'],後衛:['謝舒宇 (Sophia)','余佳容 (YU)','林洋茉 (Angel)','郭怡珍 (Maddie)','徐雨彤 (Hebe)'],守門:['陳品潔 (Jennifer)','鍾以晨 (Mia)','王羿晴 (Megan)']},
-  '女子第2隊':{前鋒:['謝知辰 (QQ)','吳曉珮 (LAURA WU)','卓芷宣 (Sally)','黃筠筑 (IRIS)','游旻璇 (Melody)','王芷妤 (April)','高葦庭 (Mimi)','李昕容 (Kelly)','徐可芯 (Coco)','張恩婉 (Lannie)'],後衛:['詹允茜 (Chloe)','鍾情 (沒有)','沙云筠 (Ingrid)','丁苡恩 (Claire)'],守門:['王韻慈 (Randy)']},
-  '女子第3隊':{前鋒:['鍾勻琤 (Anna)','張馨尹 (Abbie)','陸欣妤 (Fiona)','梅千允 (CHERRY)','吳曉玥 (CHELSEA WU)','徐煜棠 (HSU,YU-TANG)','林珊如 (Tintin)','洪遠橋 (Jacqueline)','劉廷瑋 (Nicole)','王璇 (Michelle)','莊若莛 (Tina)'],後衛:['連曉晞 (Daisy)','黃敏娟 (Jill)','曾媗瑀 (Jessie)','林宜嫻 (Elyse)'],守門:['葉珈妤 (Olivia)','陳紫彤 (Olivia)','林蔓妡 (Cindy)']},
-  '女子第4隊':{前鋒:['張宥心 (Yolanda)','張恩瑋 (ERIN)','施樂佳 (CARA)','葉品妡 (Jo)','盧可婕 (Ko-chieh Lu)','王書妤 (Abby)','陳維潔 (Alva)','鍾采媗 (BERNICE)'],後衛:['詹禺羽 (Grace)','梁羽彤 (Dona)','陳品妍 (Pinny Chen)','林永媞 (Angela)'],守門:['徐子庭 (Tiffany)','邱奕婷 (TAMMY)','周芃言 (April)','劉提敏 (無)','賴渝宸 (Muffy)']},
+  '成年男子':{前鋒:['林寬','梅拓允','詹舜宇','賴竑愷','林冠群','王冠堯','林宥辰','葉鎧睿','廖品翔','文培安','施冠宇','楊長興','陳守羿','陳律桓','紀凱元','賴楷宸','卓立夏','張允盛','彭楷竣','陳炯元','崔碩恩','王冠喆','陳冠廷','林睿宇','林宜寬','劉冠廷','林宏儒','蔡承元','吳逸鋐(旅外)','郝羿翔(旅外)','林恩旭(旅外)','蕭敬恆(旅外)','陳昱安(旅外)','范毅丞(旅外)'],後衛:['曹崴紘','潘怡誠','彭立閎','彭驀','廖文煜','許語軒','高皓晟','陳柏安','張瀚元','吳凱振','洪郁善','沈延霖','王耀陞(旅外)','陳昱全(旅外)','林靖(旅外)','桑濯恩(旅外)','陳亭旭(旅外)','李政瑋(旅外)','王詠暄(旅外)'],守門:['李翊誠','陳泰宇','陳浩喆','高皓瑄','廖昱誠(旅外)','蕭博友(旅外)','趙梓森(旅外)','陳俐龍(旅外)']},
+  '成年女子':{球員:['黃敏娟','王芷妤','余佳容','沙云筠','徐雨彤','詹喬羽','陸欣妤','劉芷菱','姚皖芝','李昕容','林宜嫻','謝舒宇','謝知辰','徐可芯','許庭毓','譚舒庭','張恩瑋','黃筠筑','林珊如','張恩婗','鍾情','高葦庭','吳季慈','劉延瑋','王書妤','莊若莛','陳韋潔','童毓晴','王璇','王宥羢','葉品妡(旅外)','葉慧貞(旅外)','林洋萁(旅外)','洪遠橋(旅外)','陶興伶(旅外)','趙子慎(旅外)'],守門:['王韻慈','陳奕晴','王羿晴','鍾愛','邱奕婷','徐子庭(旅外)']},
+  'U20男子':{前鋒:['林子暘','林寬','梅拓允','詹舜宇','賴竑愷','林冠群','王冠堯','林靖堯','楊子毅','葉鎧睿','蔡承元','陳柏澔','廖品翔','王毓鋒','鄭松緣','陳守羿','陳律桓','劉承桓','紀凱元','葉鎧齊','賴楷宸','卓慈駿','卓立夏','張允盛','彭楷竣','游宥霖','崔碩恩','李坤鴻','李立宸','蔡昱蘅','郝羿翔(旅外)','何翔熙(旅外)','林恩旭(旅外)','蕭敬恆(旅外)'],後衛:['曹崴紘','杜炎','蔡承叡','陳冠捷','劉睿然','彭立閎','邱翊翔','廖文煜','許語軒','陳柏安','吳凱振','洪郁善','何昕遠','張嘉哲','張守博(旅外)','王耀陞(旅外)','洪以恆(旅外)','陳昱全(旅外)','陳亭旭(旅外)','李曜宇(旅外)'],守門:['吳承晅','張祐綸','林宥丞','董至桀','邱顯程','陳浩喆','高皓瑄','江國睿(旅外)','陳俐龍(旅外)']},
+  'U18男子':{前鋒:['林子暘','梅拓允','賴竑愷','林冠群','王冠堯','林靖堯','楊子毅','葉鎧睿','蔡承元','郭駿業','陳柏澔','廖品翔','蔣承澔','鄭松緣','陳守羿','陳律桓','劉承桓','紀凱元','葉鎧齊','賴楷宸','陳以樂','侯辰翰','卓慈駿','卓立夏','徐顥文','游宥霖','羅祐翔','李坤鴻','魏道綸','李立宸','哈勇・拉娃','蔡昱蘅','何翔熙(旅外)','林恩旭(旅外)','顏呈翰(旅外)','簡亦璿(旅外)','葉劉浩(旅外)'],後衛:['曹崴紘','杜炎','蔡承叡','陳冠捷','劉睿然','邱翊翔','黃祈驊','宋沅澔','支紹權','蕭辰昀','賴柏愷','何昕遠','張守博(旅外)','王耀陞(旅外)','洪以恆(旅外)','李曜宇(旅外)'],守門:['吳承晅','張祐綸','林宥丞','董至桀','邱顯程','陳浩喆','江國睿(旅外)','陳俐龍(旅外)']},
+  'U18女子':{球員:['梁羽彤','曾婕琋','林珊如','謝舒宇','徐煜棠','徐可芯','連曉晞','鍾勻瑨','陳維潔','陳韋潔','盧可婕','童毓晴','鍾采婕','吳曉玥','王芮恩','王芷妤','施樂佳','張宥心','吳曉珃','卓芷宣','廖又靚','曾千謙','黃子庭(旅外)','王品予(旅外)','胡岱芬(旅外)','蔡宛諭(旅外)'],守門:['林蔓妡','陳品潔','賴渝宸','陳紫彤','葉珈妤']},
 };
 
 function renderSchedule() {
   const now = new Date();
   const todayMd = String(now.getMonth()+1).padStart(2,'0') + String(now.getDate()).padStart(2,'0');
+  const allSchedDays = [];
+  CT_SCHEDULE.forEach(m => m.days.forEach(d => allSchedDays.push({...d, month:m.month})));
+  const schedUpcoming = allSchedDays.filter(d => d.md >= todayMd).sort((a,b) => a.md.localeCompare(b.md));
+  const schedPast = allSchedDays.filter(d => d.md < todayMd).sort((a,b) => a.md.localeCompare(b.md));
+  const schedOrdered = [...schedUpcoming, ...(schedPast.length ? [{_sep:true}] : []), ...schedPast];
+
   let html = '';
-  CT_SCHEDULE.forEach(m => {
-    html += `<div class="month-title">🗓 ${m.month} 比賽日</div>`;
-    m.days.forEach(d => {
-      const isPast = d.md < todayMd;
-      const isToday = d.md === todayMd;
-      const cardClass = isToday ? 'game-card game-card-today' : isPast ? 'game-card game-card-past' : 'game-card';
-      const dateColor = isToday ? '#5af' : isPast ? '#555' : '#fff';
-      const badge = isToday
-        ? `<span class="badge">今天</span>`
-        : isPast ? `<span class="badge badge-past">結束</span>` : '';
-      html += `<div class="${cardClass}">
-        <div class="game-date" style="color:${dateColor}">📅 ${d.date}（${d.day}）${badge}</div>`;
-      d.games.forEach(g => {
-        const isFemale = g.home.startsWith('女') || g.away.startsWith('女');
-        const c = isFemale ? '#e74c3c' : '#3498db';
-        const hGK = g.homeGK ? `<div style="font-size:14px;color:#777;font-weight:normal;margin-top:2px">${g.homeGK.join('、')}</div>` : '';
-        const aGK = g.awayGK ? `<div style="font-size:14px;color:#777;font-weight:normal;margin-top:2px">${g.awayGK.join('、')}</div>` : '';
-        if (g.fitness) {
-          html += `<div style="display:flex;align-items:center;gap:6px;padding:4px 0 2px;font-size:15px;border-bottom:1px dashed #1e1e1e">
-            <span style="background:#2c1810;color:#e8835a;font-size:13px;padding:1px 6px;border-radius:4px;white-space:nowrap">體能</span>
-            <span style="color:#777;font-size:14px;min-width:90px">${g.fitness}</span>
-            <span style="color:#666;font-size:14px">${g.fitnessTeams||''}</span>
-          </div>`;
-        }
-        html += `<div class="game-row" style="align-items:flex-start">
-          <span class="g-num" style="padding-top:2px">G${g.g}</span>
-          <span style="background:#0d1f35;color:#5ab3e8;font-size:12px;padding:1px 4px;border-radius:3px;align-self:center;margin-right:2px">冰上</span>
-          <span class="g-time" style="padding-top:2px">${g.time}</span>
-          <div class="g-team" style="text-align:right;color:${c}">${g.home}${hGK}</div>
-          <span class="g-vs" style="padding-top:2px">vs</span>
-          <div class="g-team" style="color:${c}">${g.away}${aGK}</div>
+  let sCurMonth = '';
+  schedOrdered.forEach(d => {
+    if (d._sep) {
+      sCurMonth = '';
+      html += `<div style="margin:8px 0 4px;color:#555;font-size:13px;text-align:center;border-top:1px solid #333;padding-top:10px">── 已結束場次 ──</div>`;
+      return;
+    }
+    if (d.month !== sCurMonth) {
+      sCurMonth = d.month;
+      html += `<div class="month-title">🗓 ${sCurMonth} 比賽日</div>`;
+    }
+    const isPast = d.md < todayMd;
+    const isToday = d.md === todayMd;
+    const cardClass = isToday ? 'game-card game-card-today' : isPast ? 'game-card game-card-past' : 'game-card';
+    const dateColor = isToday ? '#5af' : isPast ? '#555' : '#fff';
+    const badge = isToday
+      ? `<span class="badge">今天</span>`
+      : isPast ? `<span class="badge badge-past">結束</span>` : '';
+    html += `<div class="${cardClass}">
+      <div class="game-date" style="color:${dateColor}">📅 ${d.date}（${d.day}）${badge}</div>`;
+    d.games.forEach(g => {
+      const isFemale = g.home.startsWith('女') || g.away.startsWith('女');
+      const c = isFemale ? '#e74c3c' : '#3498db';
+      const hGK = g.homeGK ? `<div style="font-size:14px;color:#777;font-weight:normal;margin-top:2px">${g.homeGK.join('、')}</div>` : '';
+      const aGK = g.awayGK ? `<div style="font-size:14px;color:#777;font-weight:normal;margin-top:2px">${g.awayGK.join('、')}</div>` : '';
+      if (g.fitness) {
+        html += `<div style="display:flex;align-items:center;gap:6px;padding:4px 0 2px;font-size:15px;border-bottom:1px dashed #1e1e1e">
+          <span style="background:#2c1810;color:#e8835a;font-size:13px;padding:1px 6px;border-radius:4px;white-space:nowrap">體能</span>
+          <span style="color:#777;font-size:14px;min-width:90px">${g.fitness}</span>
+          <span style="color:#666;font-size:14px">${g.fitnessTeams||''}</span>
         </div>`;
-      });
-      html += '</div>';
+      }
+      html += `<div class="game-row" style="align-items:flex-start">
+        <span class="g-num" style="padding-top:2px">G${g.g}</span>
+        <span style="background:#0d1f35;color:#5ab3e8;font-size:12px;padding:1px 4px;border-radius:3px;align-self:center;margin-right:2px">冰上</span>
+        <span class="g-time" style="padding-top:2px">${g.time}</span>
+        <div class="g-team" style="text-align:right;color:${c}">${g.home}${hGK}</div>
+        <span class="g-vs" style="padding-top:2px">vs</span>
+        <div class="g-team" style="color:${c}">${g.away}${aGK}</div>
+      </div>`;
     });
+    html += '</div>';
   });
   document.getElementById('ct-s').innerHTML = html;
-  setTimeout(() => scrollToFirst('#ct-s .game-card:not(.game-card-past)'), 100);
+  // 最近場次已在最上方
+  const appContent = document.getElementById('app-content');
+  if (appContent) appContent.scrollTop = 0;
 }
 
 function renderRoster() {
   let html = '';
-  const posLabel = {'前鋒':'⛸ 前鋒 FW','後衛':'🛡 後衛 DF','守門':'🥅 守門 GK'};
+  const posLabel = {'前鋒':'⛸ 前鋒 FW','後衛':'🛡 後衛 DF','守門':'🥅 守門 GK','球員':'⛸ 球員'};
   Object.entries(CT_ROSTER).forEach(([team, players]) => {
-    const isMale = team.startsWith('男');
+    const isMale = !team.includes('女');
     const c = isMale ? '#3498db' : '#e74c3c';
     const isPositioned = !Array.isArray(players);
     const total = isPositioned ? Object.values(players).flat().length : players.length;
@@ -539,11 +542,18 @@ function renderTraining() {
   const allDays = [];
   CT_TRAINING.forEach(m => m.days.forEach(d => allDays.push({...d, type:'train', month:m.month})));
   CT_SCHEDULE.forEach(m => m.days.forEach(d => allDays.push({...d, type:'match', month:m.month})));
-  allDays.sort((a,b) => a.md.localeCompare(b.md));
+  const upcoming = allDays.filter(d => d.md >= todayMd).sort((a,b) => a.md.localeCompare(b.md));
+  const past = allDays.filter(d => d.md < todayMd).sort((a,b) => a.md.localeCompare(b.md));
+  const ordered = [...upcoming, ...(past.length ? [{_sep:true}] : []), ...past];
 
   let html = '';
   let curMonth = '';
-  allDays.forEach(d => {
+  ordered.forEach(d => {
+    if (d._sep) {
+      curMonth = '';
+      html += `<div style="margin:8px 0 4px;color:#555;font-size:13px;text-align:center;border-top:1px solid #333;padding-top:10px">── 已結束場次 ──</div>`;
+      return;
+    }
     if (d.month !== curMonth) {
       curMonth = d.month;
       html += `<div class="month-title">📆 ${curMonth}</div>`;
@@ -602,7 +612,9 @@ function renderTraining() {
     }
   });
   document.getElementById('ct-t').innerHTML = html;
-  setTimeout(() => scrollToFirst('#ct-t .train-card:not(.train-card-past)'), 100);
+  // 最近場次已在最上方
+  const appContent = document.getElementById('app-content');
+  if (appContent) appContent.scrollTop = 0;
 }
 
 // 從主畫面開啟（Standalone 模式）時強制重新載入，確保取得最新版本
